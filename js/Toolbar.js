@@ -96,15 +96,6 @@ export class Toolbar {
 
         this.controlsDialog = document.createElement('div');
         this.controlsDialog.classList.add('controls-dialog');
-        this.controlsDialog.style.position = 'fixed';
-        this.controlsDialog.style.left = '50%';
-        this.controlsDialog.style.top = '50%';
-        this.controlsDialog.style.transform = 'translate(-50%, -50%)';
-        this.controlsDialog.style.width = '1rem';
-        this.controlsDialog.style.height = '5rem';
-        this.controlsDialog.style.display = 'block';
-        this.controlsDialog.style.zIndex = 10;
-        this.controlsDialog.style.textAlign = 'center';
         this.controlsDialog.classList.add('dialog');
 
         this.labelOne = document.createElement('label');
