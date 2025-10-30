@@ -35,7 +35,6 @@ export class GraphAlgorithms {
             this.incrementTime(1);
             u.setDistance(this.getTime());
             u.setColor('gray');
-            u.select('gray');
 
             for(let e of u.adjEdges) {
                 if(e.getVertexV().getColor() === 'white') {
@@ -48,7 +47,7 @@ export class GraphAlgorithms {
             this.incrementTime(1);
             u.setFinishTime(this.getTime());
             u.setColor('black');
-            u.select('black');
+            u.select('red');
             this.result.add(u.getLabel());
             await this.wait(600);
         }
@@ -71,7 +70,6 @@ export class GraphAlgorithms {
         }
 
         sourceVertex.setColor('gray');
-        sourceVertex.select('gray');
         sourceVertex.setDistance(0);
         sourceVertex.setPredecessor(null);
 
@@ -85,7 +83,6 @@ export class GraphAlgorithms {
             for(let e of u.adjEdges) {
                 if(e.getVertexV().getColor() === 'white') {
                     e.getVertexV().setColor('gray');
-                    e.getVertexV().select('gray');
                     e.getVertexV().setDistance(u.getDistance() + 1);
                     e.getVertexV().setPredecessor(u);
                     await this.wait(600);
@@ -94,7 +91,7 @@ export class GraphAlgorithms {
             }
 
             u.setColor('black');
-            u.select('black');
+            u.select('red');
             this.result.add(u.getLabel());
             await this.wait(600);
         }
@@ -123,7 +120,6 @@ export class GraphAlgorithms {
             this.incrementTime(1);
             u.setDistance(this.getTime());
             u.setColor('gray');
-            u.select('gray');
 
             for(let e of u.adjEdges) {
                 if(e.getVertexV().getColor() === 'white') {
@@ -137,7 +133,7 @@ export class GraphAlgorithms {
             u.setFinishTime(this.getTime());
             this.topoSortedList.add(u);
             u.setColor('black');
-            u.select('black');
+            u.select('red');
             this.result.add(u.getLabel());
             await this.wait(600);
         }
@@ -194,6 +190,22 @@ export class GraphAlgorithms {
         await this.wait(600);
 
         startVertex.select();
+    
+        this.initializeSingleSource(graph, startVertex);
+
+        for (let vertex of graph.vertices) {
+            for (let edge of vertex.adjEdges) {
+                this.relax(edge.u, edge.v, edge.weight);
+            }
+        }
+
+        for (let vertex of graph.vertices) {
+            for (let edge of vertex.adjEdges) {
+                if(edge.v.getDistance() > edge.u.getDistance() + edge.weight) {
+
+                }
+            }
+        }
     }
 
     async findMaxFlow(graph, sourceVertex, sinkVertex) {
@@ -203,7 +215,11 @@ export class GraphAlgorithms {
         this.result.add('Maximum Flow: ');
         await this.wait(600);
 
-        sourceVertex.select();
+        for (let vertex of graph.vertices) {
+            for (let edge of vertex.adjEdges) {
+                edge.flow = 0;
+            }
+        }
     }
 
     async findMaxMatch(graph) {
