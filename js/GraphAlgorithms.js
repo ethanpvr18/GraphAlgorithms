@@ -43,6 +43,7 @@ export class GraphAlgorithms {
             for(let e of u.adjEdges) {
                 if(e.getVertexV().getColor() === 'white') {
                     e.getVertexV().setPredecessor(u);
+                    e.select('light red');
                     await this.wait();
                     await this.dfsVisit(graph, e.getVertexV());
                 }
@@ -93,6 +94,7 @@ export class GraphAlgorithms {
                     e.getVertexV().setColor('gray');
                     e.getVertexV().setDistance(u.getDistance() + 1);
                     e.getVertexV().setPredecessor(u);
+                    e.select('light red');
                     await this.wait();
                     queue.enqueue(e.getVertexV());
                 }
@@ -136,6 +138,7 @@ export class GraphAlgorithms {
             for(let e of u.adjEdges) {
                 if(e.getVertexV().getColor() === 'white') {
                     e.getVertexV().setPredecessor(u);
+                    e.select('light red');
                     await this.wait();
                     await this.topoSortVisit(graph, e.getVertexV());
                 }
