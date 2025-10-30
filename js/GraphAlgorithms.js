@@ -13,11 +13,15 @@ export class GraphAlgorithms {
     }
     
     async dfs(graph, sourceVertex) {
-        if(this.result === null)
+        if(this.result) {
+            this.result.remove();
             this.result = new Result();
+        } else {
+            this.result = new Result();
+        }
         this.result.clear();
         this.result.add('Depth First Search: ');
-        await this.wait(600);
+        await this.wait();
 
         for(let u of graph.vertices) {
             u.setColor('white');
@@ -39,7 +43,7 @@ export class GraphAlgorithms {
             for(let e of u.adjEdges) {
                 if(e.getVertexV().getColor() === 'white') {
                     e.getVertexV().setPredecessor(u);
-                    await this.wait(600);
+                    await this.wait();
                     await this.dfsVisit(graph, e.getVertexV());
                 }
             }
@@ -49,16 +53,20 @@ export class GraphAlgorithms {
             u.setColor('black');
             u.select('red');
             this.result.add(u.getLabel());
-            await this.wait(600);
+            await this.wait();
         }
     }
 
     async bfs(graph, sourceVertex) {
-        if(this.result === null)
+        if(this.result) {
+            this.result.remove();
             this.result = new Result();
+        } else {
+            this.result = new Result();
+        }
         this.result.clear();
         this.result.add('Breadth First Search: ');
-        await this.wait(600);
+        await this.wait();
 
         for(let u of graph.vertices) {
             if(u !== sourceVertex) {
@@ -85,7 +93,7 @@ export class GraphAlgorithms {
                     e.getVertexV().setColor('gray');
                     e.getVertexV().setDistance(u.getDistance() + 1);
                     e.getVertexV().setPredecessor(u);
-                    await this.wait(600);
+                    await this.wait();
                     queue.enqueue(e.getVertexV());
                 }
             }
@@ -93,16 +101,20 @@ export class GraphAlgorithms {
             u.setColor('black');
             u.select('red');
             this.result.add(u.getLabel());
-            await this.wait(600);
+            await this.wait();
         }
     }
 
     async topoSort(graph, sourceVertex) {
-        if(this.result === null)
+        if(this.result) {
+            this.result.remove();
             this.result = new Result();
+        } else {
+            this.result = new Result();
+        }
         this.result.clear();
         this.result.add('Topological Sort: ');
-        await this.wait(600);
+        await this.wait();
 
         for(let u of graph.vertices) {
             u.setColor('white');
@@ -124,7 +136,7 @@ export class GraphAlgorithms {
             for(let e of u.adjEdges) {
                 if(e.getVertexV().getColor() === 'white') {
                     e.getVertexV().setPredecessor(u);
-                    await this.wait(600);
+                    await this.wait();
                     await this.topoSortVisit(graph, e.getVertexV());
                 }
             }
@@ -135,13 +147,17 @@ export class GraphAlgorithms {
             u.setColor('black');
             u.select('red');
             this.result.add(u.getLabel());
-            await this.wait(600);
+            await this.wait();
         }
     }
 
     async createMst(graph) {
-        if(this.result === null)
+        if(this.result) {
+            this.result.remove();
             this.result = new Result();
+        } else {
+            this.result = new Result();
+        }
         this.result.clear();
         this.result.add('Minimum Spanning Tree');
 
@@ -157,7 +173,7 @@ export class GraphAlgorithms {
                     v.select();
             }
 
-            await this.wait(600);
+            await this.wait();
             safeEdge = this.getSafeEdge(graph);
         }
         
@@ -183,11 +199,15 @@ export class GraphAlgorithms {
     }
 
     async findShortestPath(graph, startVertex, destinationVertex) {
-        if(this.result === null)
+        if(this.result) {
+            this.result.remove();
             this.result = new Result();
+        } else {
+            this.result = new Result();
+        }
         this.result.clear();
         this.result.add('Shortest Path: ');
-        await this.wait(600);
+        await this.wait();
 
         startVertex.select();
     
@@ -209,11 +229,15 @@ export class GraphAlgorithms {
     }
 
     async findMaxFlow(graph, sourceVertex, sinkVertex) {
-        if(this.result === null)
+        if(this.result) {
+            this.result.remove();
             this.result = new Result();
+        } else {
+            this.result = new Result();
+        }
         this.result.clear();
         this.result.add('Maximum Flow: ');
-        await this.wait(600);
+        await this.wait();
 
         for (let vertex of graph.vertices) {
             for (let edge of vertex.adjEdges) {
@@ -223,11 +247,15 @@ export class GraphAlgorithms {
     }
 
     async findMaxMatch(graph) {
-        if(this.result === null)
+        if(this.result) {
+            this.result.remove();
             this.result = new Result();
+        } else {
+            this.result = new Result();
+        }
         this.result.clear();
         this.result.add('Maximum Matching: ');
-        await this.wait(600);
+        await this.wait();
     }
 
     initializeSingleSource(graph, s) {
@@ -262,7 +290,7 @@ export class GraphAlgorithms {
         }
     }
 
-    wait(ms) { return new Promise(resolve => setTimeout(resolve, ms)); }
+    wait() { return new Promise(resolve => setTimeout(resolve, 400)); }
     getTime() { return this.time; }
     resetTime() { this.time = 0; }
     incrementTime(increment) { this.time += increment; }
