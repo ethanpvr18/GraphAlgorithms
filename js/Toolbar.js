@@ -97,6 +97,7 @@ export class Toolbar {
         this.controlsDialog = document.createElement('div');
         this.controlsDialog.classList.add('controls-dialog');
         this.controlsDialog.classList.add('dialog');
+        this.controlsDialog.style.display = 'block';
 
         this.labelOne = document.createElement('label');
         this.labelOne.textContent = 'User Controls: ';
