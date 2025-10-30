@@ -21,6 +21,7 @@ export class GraphAlgorithms {
 
         for(let u of graph.vertices) {
             u.setColor('white');
+            u.deselect();
             u.setPredecessor(null);
         }
 
@@ -34,11 +35,11 @@ export class GraphAlgorithms {
             this.incrementTime(1);
             u.setDistance(this.getTime());
             u.setColor('gray');
+            u.select('gray');
 
             for(let e of u.adjEdges) {
                 if(e.getVertexV().getColor() === 'white') {
                     e.getVertexV().setPredecessor(u);
-                    e.select('gray');
                     await this.wait(600);
                     await this.dfsVisit(graph, e.getVertexV());
                 }
@@ -47,8 +48,8 @@ export class GraphAlgorithms {
             this.incrementTime(1);
             u.setFinishTime(this.getTime());
             u.setColor('black');
+            u.select('black');
             this.result.add(u.getLabel());
-            u.select('red');
             await this.wait(600);
         }
     }
@@ -63,12 +64,14 @@ export class GraphAlgorithms {
         for(let u of graph.vertices) {
             if(u !== sourceVertex) {
                 u.setColor('white');
+                u.deselect();
                 u.setDistance(Infinity);
                 u.setPredecessor(null);
             }
         }
 
         sourceVertex.setColor('gray');
+        sourceVertex.select('gray');
         sourceVertex.setDistance(0);
         sourceVertex.setPredecessor(null);
 
@@ -82,17 +85,17 @@ export class GraphAlgorithms {
             for(let e of u.adjEdges) {
                 if(e.getVertexV().getColor() === 'white') {
                     e.getVertexV().setColor('gray');
+                    e.getVertexV().select('gray');
                     e.getVertexV().setDistance(u.getDistance() + 1);
                     e.getVertexV().setPredecessor(u);
-                    e.select('grey');
                     await this.wait(600);
                     queue.enqueue(e.getVertexV());
                 }
             }
 
             u.setColor('black');
+            u.select('black');
             this.result.add(u.getLabel());
-            u.select('red');
             await this.wait(600);
         }
     }
@@ -106,6 +109,7 @@ export class GraphAlgorithms {
 
         for(let u of graph.vertices) {
             u.setColor('white');
+            u.deselect();
             u.setPredecessor(null);
         }
 
@@ -119,11 +123,11 @@ export class GraphAlgorithms {
             this.incrementTime(1);
             u.setDistance(this.getTime());
             u.setColor('gray');
+            u.select('gray');
 
             for(let e of u.adjEdges) {
                 if(e.getVertexV().getColor() === 'white') {
                     e.getVertexV().setPredecessor(u);
-                    e.select('grey');
                     await this.wait(600);
                     await this.topoSortVisit(graph, e.getVertexV());
                 }
@@ -133,8 +137,8 @@ export class GraphAlgorithms {
             u.setFinishTime(this.getTime());
             this.topoSortedList.add(u);
             u.setColor('black');
+            u.select('black');
             this.result.add(u.getLabel());
-            u.select('red');
             await this.wait(600);
         }
     }
