@@ -324,7 +324,7 @@ input {
     top: 50%;
     transform: translate(-50%, -50%);
     width: 1rem;
-    height: 5rem;
+    height: 10rem;
     z-index: 10;
     text-align: center;
     display: block;
