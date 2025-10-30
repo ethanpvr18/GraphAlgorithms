@@ -123,6 +123,21 @@ export class Toolbar {
         this.labelThree.classList.add('controls');
         this.controlsDialog.appendChild(this.labelThree);
 
+        this.labelFour = document.createElement('li');
+        this.labelFour.textContent = 'Press Cmd/Ctrl + Backspace to delete selected vertices and edges';
+        this.labelFour.classList.add('controls');
+        this.controlsDialog.appendChild(this.labelFour);
+
+        this.labelFive = document.createElement('li');
+        this.labelFive.textContent = 'Press Escape to deselect vertices and edges ';
+        this.labelFive.classList.add('controls');
+        this.controlsDialog.appendChild(this.labelFive);
+
+        this.labelSix = document.createElement('li');
+        this.labelSix.textContent = 'Enter to submit changes';
+        this.labelSix.classList.add('controls');
+        this.controlsDialog.appendChild(this.labelSix);
+
         document.body.appendChild(this.controlsDialog);
 
         document.body.appendChild(this.element);
