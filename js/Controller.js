@@ -232,8 +232,7 @@ const mouseMoveListener = (event) => {
     }
 
     if(draggedResult && draggedResult.isDragging) {
-        const rem = parseFloat(getComputedStyle(document.documentElement).fontSize);
-        draggedResult.setPosition(( event.clientX / rem ) - dragOffsetX, ( event.clientY / rem ) - dragOffsetY);
+        draggedResult.setPosition(event.clientX - dragOffsetX, event.clientY - dragOffsetY);
     }
 
     if(selectionArea && selectionArea.isDragging) {
