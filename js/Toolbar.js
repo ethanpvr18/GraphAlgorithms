@@ -57,6 +57,18 @@ export class Toolbar {
         this.shortestPathBtn.classList.add('btn');
         this.shortestPathBtn.classList.add('dropdown-button');
 
+        this.maxFlowBtn = document.createElement('input');
+        this.maxFlowBtn.type = 'button';
+        this.maxFlowBtn.value = 'Maximum Flow';
+        this.maxFlowBtn.classList.add('btn');
+        this.maxFlowBtn.classList.add('dropdown-button');
+
+        this.maxMatchBtn = document.createElement('input');
+        this.maxMatchBtn.type = 'button';
+        this.maxMatchBtn.value = 'Maximum Matching';
+        this.maxMatchBtn.classList.add('btn');
+        this.maxMatchBtn.classList.add('dropdown-button');
+
         this.fileDropdown = document.createElement('div');
         this.fileDropdown.classList.add('dropdown');
 
@@ -94,6 +106,8 @@ export class Toolbar {
         this.runDropdownContent.appendChild(this.topoSortBtn);
         this.runDropdownContent.appendChild(this.mstBtn);
         this.runDropdownContent.appendChild(this.shortestPathBtn);
+        this.runDropdownContent.appendChild(this.maxFlowBtn);
+        this.runDropdownContent.appendChild(this.maxMatchBtn);
 
         this.runDropdown.appendChild(this.runDropdownTitle);
         this.runDropdown.appendChild(this.runDropdownContent);

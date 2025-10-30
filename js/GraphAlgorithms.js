@@ -194,7 +194,24 @@ export class GraphAlgorithms {
         await this.wait(600);
 
         startVertex.select();
-        console.log(startVertex.adjEdges);
+    }
+
+    async findMaxFlow(graph, sourceVertex, sinkVertex) {
+        if(this.result === null)
+            this.result = new Result();
+        this.result.clear();
+        this.result.add('Maximum Flow: ');
+        await this.wait(600);
+
+        sourceVertex.select();
+    }
+
+    async findMaxMatch(graph) {
+        if(this.result === null)
+            this.result = new Result();
+        this.result.clear();
+        this.result.add('Maximum Matching: ');
+        await this.wait(600);
     }
 
     initializeSingleSource(graph, s) {

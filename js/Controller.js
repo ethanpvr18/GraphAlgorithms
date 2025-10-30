@@ -410,6 +410,37 @@ const shortestPathBtnListener = async () => {
 
 toolbar.shortestPathBtn.addEventListener('click', shortestPathBtnListener);
 
+const maxFlowBtnListener = async () => {
+    if(toolbar.controlsDialog.style.display == 'block')
+            toolbar.controlsDialog.style.display = 'none';
+
+    graph.clearSelection();
+    currentDialog = null;
+    currentDialog = new TwoInputDialog();
+
+    const userInput = await currentDialog.waitForUserInput();
+
+    const sourceVertex = graph.findVertexByLabel(userInput[0]);
+    if(!sourceVertex) return;
+    const sinkVertex = graph.findVertexByLabel(userInput[1]);
+    if(!sinkVertex) return;
+
+    graphAlgorithms.findMaxFlow(graph, sourceVertex, sinkVertex);
+};
+
+toolbar.maxFlowBtn.addEventListener('click', maxFlowBtnListener);
+
+const maxMatchBtnListener = async () => {
+    if(toolbar.controlsDialog.style.display == 'block')
+            toolbar.controlsDialog.style.display = 'none';
+
+    graph.clearSelection();
+
+    graphAlgorithms.findMaxMatch(graph);
+};
+
+toolbar.maxMatchBtn.addEventListener('click', maxMatchBtnListener);
+
 const beforeUnloadListener = () => {
     graph.updateGraph();
 };
