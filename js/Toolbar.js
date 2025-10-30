@@ -126,7 +126,7 @@ export class Toolbar {
         this.controlsDialog.appendChild(this.labelFive);
 
         this.labelSix = document.createElement('li');
-        this.labelSix.textContent = 'Enter to submit changes';
+        this.labelSix.textContent = 'Press Enter to submit changes';
         this.labelSix.classList.add('controls');
         this.controlsDialog.appendChild(this.labelSix);
 
