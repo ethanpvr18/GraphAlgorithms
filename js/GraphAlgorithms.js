@@ -145,33 +145,37 @@ export class GraphAlgorithms {
         this.result.clear();
         this.result.add('Minimum Spanning Tree');
 
-        let minEdge = graph.getMinEdge();
+        let safeEdge = graph.getSafeEdge();
 
-        while(minEdge != null) {
-            minEdge.select();
+        while(safeEdge != null) {
+            safeEdge.select();
 
             for(let v of graph.vertices) {
-                if(minEdge.u == v && !v.element.classList.contains('selected'))
+                if(safeEdge.u == v && !v.element.classList.contains('selected'))
                     v.select();
-                if(minEdge.v == v && !v.element.classList.contains('selected'))
+                if(safeEdge.v == v && !v.element.classList.contains('selected'))
                     v.select();
             }
 
             await this.wait(600);
-            minEdge = graph.getMinEdge();
+            safeEdge = graph.getSafeEdge();
         }
         
     }
 
-    getMinEdge(edges) {
-        let minEdge = null;
+    getSafeEdge(edges) {
+        let safeEdge = null;
         for(let edge of edges) {
-            if(minEdge == null)
-                minEdge = edge;
-            else if (minEdge.weight > edge.weight)
-                minEdge = edge;
+            if(safeEdge == null)
+                if(!edge.u.element.classList.contains('selected') && !edge.v.element.classList.contains('selected')) {
+                    safeEdge = edge;
+                }
+            else if (safeEdge.weight > edge.weight)
+                if(!edge.u.element.classList.contains('selected') && !edge.v.element.classList.contains('selected')) {
+                    safeEdge = edge;
+                }
             else
-                return minEdge;
+                return safeEdge;
 
         }
     }
