@@ -139,6 +139,34 @@ const elementKeyModifier = (event) => {
             }
         }
     }
+
+    if((event.ctrlKey || event.metaKey) && event.key === 'c') {
+        for(let v of this.vertices) {
+            if(v.element.classList.contains('selected')) {
+
+            }
+        }
+
+        for(let v of this.vertices) {
+            for(let e of v.adjEdges) {
+                if(e.element.classList.contains('selected')) {
+                
+                }
+            }
+        }
+    }
+
+    if((event.ctrlKey || event.metaKey) && event.key === 'v') {
+
+    }
+
+    if((event.ctrlKey || event.metaKey) && event.key === 'x') {
+
+    }
+
+    if((event.ctrlKey || event.metaKey) && event.key === 'z') {
+
+    }
 };
 
 document.addEventListener('keydown', elementKeyModifier);
