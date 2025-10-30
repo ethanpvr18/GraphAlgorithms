@@ -48,14 +48,20 @@ export class Vertex {
     }
     setKey(key) { this.key = key; }
 
-    select() {
-        if(this.element && !this.element.classList.contains('selected'))
+    select(color='red') {
+        if(this.element && !this.element.classList.contains('selected')) {
             this.element.classList.add('selected');
+            this.element.style.boxShadow = `0rem 0rem 0.3rem 0.3rem ${color}`;
+            this.element.style.border = `0.01rem solid ${color}`;
+        }
     }
 
     deselect() {
-        if(this.element && this.element.classList.contains('selected'))
+        if(this.element && this.element.classList.contains('selected')) {
             this.element.classList.remove('selected');
+            this.element.style.boxShadow = `0rem 0rem 0.3rem 0.3rem transparent`;
+            this.element.style.border = `0.01rem solid black`;
+        }
     }
 
     remove() {
