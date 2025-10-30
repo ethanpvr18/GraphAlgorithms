@@ -8,8 +8,8 @@ export class Result {
         this.element = document.createElement('div');
         const rem = parseFloat(getComputedStyle(document.documentElement).fontSize);
         
-        this.element.style.left = `${(document.body.getBoundingClientRect().width/2) / rem || this.x}rem`;
-        this.element.style.top = `${(document.body.getBoundingClientRect().height/2) / rem || this.y}rem`;
+        this.element.style.left = `${this.x / rem}rem`;
+        this.element.style.top = `${this.y / rem}rem`;
         this.element.classList.add('result');
 
         document.body.appendChild(this.element);
@@ -28,13 +28,17 @@ export class Result {
     getYPos() { return this.y; }
 
     setXPos(x) { 
+        const rem = parseFloat(getComputedStyle(document.documentElement).fontSize);
+
         this.x = x; 
-        this.element.style.left = `${this.x}rem`;
+        this.element.style.left = `${this.x / rem}rem`;
     }
 
-    setYPos(y) {         
+    setYPos(y) { 
+        const rem = parseFloat(getComputedStyle(document.documentElement).fontSize);
+
         this.y = y;
-        this.element.style.top = `${this.y}rem`; 
+        this.element.style.top = `${this.y / rem}rem`; 
     }
 
     setPosition(x, y) {
