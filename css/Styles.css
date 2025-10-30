@@ -1,0 +1,332 @@
+body {
+    position: relative;
+    font-family: 'Gill Sans', 'Helvetica', 'Arial', sans-serif;
+    background-color: white;
+    background-image: radial-gradient(black 0.08rem, transparent 0.04rem);
+    background-size: 1.6rem 1.6rem;
+    overflow: hidden;
+    cursor: crosshair;
+}
+
+.vertex {
+    z-index: 3;
+
+    position: absolute; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    transform-origin: center center;
+    width: 3rem;
+    height: 3rem;
+    padding: 0.1rem;
+    background-color: black;
+    color: white;
+    font-size: 1.25rem;
+    text-overflow: ellipsis;
+    border: 0.1rem solid black;
+    border-radius: 50%;
+    box-shadow: 0rem 0rem 1rem 2rem transparent;
+
+    cursor: pointer;
+}
+
+.edge {
+    z-index: 1;
+
+    position: absolute; 
+
+    user-select: none;
+    height: 0.2rem;
+    transform-origin: 0% 50%;
+    box-shadow: 0rem 0rem 3rem 5rem transparent;
+    background-color: black;
+    color: white;
+
+    cursor: pointer;
+}
+
+.edge-weight {
+    z-index: 2;
+
+    position: absolute; 
+    transform: rotate(0deg);
+    padding: 0.2rem 0.2rem;
+    box-shadow: 0rem 0rem 1rem 1rem transparent;
+
+    font-size: 1rem;
+    background-color: white;
+    color: black;
+    border: 0.1rem solid black;
+    border-radius: 20%;
+    align-items: center;
+    justify-content: center;
+
+    user-select: none;
+    cursor: pointer;
+}
+
+.edge-flow {
+    z-index: 2;
+
+    position: absolute; 
+    transform: rotate(0deg);
+    padding: 0.2rem 0.2rem;
+    box-shadow: 0rem 0rem 1rem 1rem transparent;
+
+    font-size: 1rem;
+    background-color: white;
+    color: black;
+    border: 0.1rem solid black;
+    border-radius: 20%;
+    align-items: center;
+    justify-content: center;
+
+    user-select: none;
+    cursor: pointer;
+}
+
+.edge-arrow {
+    z-index: 2;
+
+    position: absolute;
+    width: 0rem;
+    height: 0rem;
+    border-left: 0.5rem solid transparent;
+    border-right: 0.5rem solid transparent;
+    border-bottom: 1.2rem solid black;
+    box-shadow: 0rem 0rem 0.6rem 1rem transparent;
+
+    transform-origin: 50% 0%;
+
+    user-select: none;
+    cursor: pointer;
+}
+
+input {
+    cursor: text;
+}
+
+.editor {
+    z-index: 5;
+    position: absolute;
+    transform-origin: top left;
+    border: 0.1rem solid black;
+    cursor: pointer;
+}
+
+.dialog {
+    z-index: 5;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    transform-origin: center center;
+    
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+    width: auto;
+    min-width: 15rem;
+    max-width: 20rem;
+    padding: 1rem;
+    font-family: 'Gill Sans', 'Helvetica', 'Arial', sans-serif;
+    font-size: 1rem;
+    border: 0.1rem solid black;
+    box-shadow: 0 2rem 3rem rgba(0,0,0,0.3);
+
+    background-color: white;
+    color: black;
+    cursor: move;
+
+    pointer-events: auto;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+}
+
+.input {
+    width: 100%;
+    max-width: 10rem;
+    text-align: center;
+    cursor: text;
+}
+
+.toolbar {
+    background-color: black;
+    border: none;
+    width: 100%;
+    height: 10%;
+    color: white;
+    top: 1rem;
+    left: 1rem;
+    right: 1rem;
+    cursor: pointer;
+}
+
+.selection-area {    
+    z-index: 8;
+
+    position: absolute;
+    background-color: rgba(0,0,0,0.1);
+    border: 0.1rem dashed black;
+    cursor: crosshair;
+    pointer-events: none;
+}
+
+.result {
+    z-index: 9;
+
+    position: absolute;
+    overflow: auto;
+    transform-origin: center center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 0.5rem;
+
+    min-width: 4rem;
+    min-height: 2rem;
+    font-family: 'Gill Sans', 'Helvetica', 'Arial', sans-serif;
+    font-size: 1rem;
+    font-weight: 100;
+    border: 0.1rem solid black;
+    background-color: white;
+    box-shadow: 0 2rem 3rem rgba(0,0,0,0.3);
+    color: black;
+    cursor: move;
+}
+
+.submit {
+    z-index: 12;
+
+    font-family: 'Gill Sans', 'Helvetica', 'Arial', sans-serif;
+    font-size: 1rem;
+    font-weight: 100;
+
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 2rem;
+
+    min-width: 6rem;
+    padding: 0.4rem 1rem;
+    cursor: pointer;
+}
+
+.btn {
+    z-index: 11;
+
+    font-family: 'Gill Sans', 'Helvetica', 'Arial', sans-serif;
+    font-size: 1rem;
+    font-weight: 100;
+
+    background-color: black;
+    color: white;
+    border: none;
+
+    padding: 0.3rem;
+    min-width: 2rem;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: gray;
+    cursor: pointer;
+}
+
+.selected {
+    box-shadow: 0rem 0rem 0.3rem 0.3rem red;
+    border: 0.01rem solid red;
+}
+
+.inEditMode {
+    background-color: rgba(255, 0, 0, 0.7);
+}
+
+.inEditMode:hover {
+    background-color: rgba(255, 0, 0, 0.5);
+}
+
+@media print {
+    * {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        color-adjust: exact;
+    }
+
+    .vertex {
+        background-color: white;
+        border: 0.1rem solid black;
+        color: black;
+    }
+
+    .toolbar, .selection-area, .editor {
+        display: none;
+    }
+}
+
+.toolbar {
+    overflow: hidden;
+    z-index: 13;
+    cursor: pointer;
+}
+
+.dropdown {
+    float: left;
+    z-index: 13;
+    cursor: pointer;
+}
+
+.dropdown-content {
+    position: absolute;
+    display: none;
+    z-index: 14;
+    cursor: pointer;
+}
+
+.dropdown-content .dropdown-button {
+    display: block;
+    min-width: 12rem;
+    text-align: left;
+    z-index: 14;
+    cursor: pointer;
+}
+
+.dropdown-button {
+    background-color: rgb(180, 180, 180);
+    color: black;
+    cursor: pointer;
+}
+
+.dropdown-button:hover {
+    background-color: rgb(200, 200, 200);
+    color: black;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+    z-index: 14;
+}
+
+.controls-dialog {
+    padding: 1.7rem;
+}
+
+.controls-title {
+    font-weight: bold;
+}
+
+.controls {
+    font-size: 0.8rem;
+    text-align: left;
+    padding: 0.2rem;
+}
