@@ -166,17 +166,17 @@ export class GraphAlgorithms {
     getSafeEdge(edges) {
         let safeEdge = null;
         for(let edge of edges) {
-            if(safeEdge == null)
+            if(safeEdge == null) {
                 if(!edge.u.element.classList.contains('selected') && !edge.v.element.classList.contains('selected')) {
                     safeEdge = edge;
                 }
-            else if (safeEdge.weight > edge.weight)
+            } else if (safeEdge.weight > edge.weight) {
                 if(!edge.u.element.classList.contains('selected') && !edge.v.element.classList.contains('selected')) {
                     safeEdge = edge;
                 }
-            else
+            } else {
                 return safeEdge;
-
+            }
         }
     }
 
