@@ -145,7 +145,7 @@ export class GraphAlgorithms {
         this.result.clear();
         this.result.add('Minimum Spanning Tree');
 
-        let safeEdge = graph.getSafeEdge();
+        let safeEdge = this.getSafeEdge(graph);
 
         while(safeEdge != null) {
             safeEdge.select();
@@ -158,24 +158,26 @@ export class GraphAlgorithms {
             }
 
             await this.wait(600);
-            safeEdge = graph.getSafeEdge();
+            safeEdge = this.getSafeEdge(graph);
         }
         
     }
 
-    getSafeEdge(edges) {
+    getSafeEdge(graph) {
         let safeEdge = null;
-        for(let edge of edges) {
-            if(safeEdge == null) {
-                if(!edge.u.element.classList.contains('selected') && !edge.v.element.classList.contains('selected')) {
-                    safeEdge = edge;
+        for (let vertex of graph.vertices) {
+            for (let edge of vertex.adjEdges) {
+                if(safeEdge == null) {
+                    if(!edge.element.classList.contains('selected') && !edge.u.element.classList.contains('selected') && !edge.v.element.classList.contains('selected')) {
+                        safeEdge = edge;
+                    }
+                } else if (safeEdge.weight > edge.weight) {
+                    if(!edge.element.classList.contains('selected') && !edge.u.element.classList.contains('selected') && !edge.v.element.classList.contains('selected')) {
+                        safeEdge = edge;
+                    }
+                } else {
+                    return safeEdge;
                 }
-            } else if (safeEdge.weight > edge.weight) {
-                if(!edge.u.element.classList.contains('selected') && !edge.v.element.classList.contains('selected')) {
-                    safeEdge = edge;
-                }
-            } else {
-                return safeEdge;
             }
         }
     }
