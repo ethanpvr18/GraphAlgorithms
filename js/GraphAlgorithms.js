@@ -182,6 +182,17 @@ export class GraphAlgorithms {
         }
     }
 
+    async findShortestPath(graph, startVertex, destinationVertex) {
+        if(this.result === null)
+            this.result = new Result();
+        this.result.clear();
+        this.result.add('Shortest Path: ');
+        await this.wait(600);
+
+        startVertex.select();
+        console.log(startVertex.adjEdges);
+    }
+
     initializeSingleSource(graph, s) {
         for(let v of graph.vertices) {
             v.distance = Infinity;

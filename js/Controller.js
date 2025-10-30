@@ -3,6 +3,7 @@ import { Toolbar } from './Toolbar.js';
 import { SelectionArea } from './SelectionArea.js';
 import { Editor } from './Editor.js';
 import { Dialog } from './Dialog.js';
+import { TwoInputDialog } from './TwoInputDialog.js';
 import { GraphAlgorithms } from './GraphAlgorithms.js';
 
 const toolbar = new Toolbar();
@@ -388,6 +389,26 @@ const mstBtnListener = async () => {
 };
 
 toolbar.mstBtn.addEventListener('click', mstBtnListener);
+
+const shortestPathBtnListener = async () => {
+    if(toolbar.controlsDialog.style.display == 'block')
+            toolbar.controlsDialog.style.display = 'none';
+
+    graph.clearSelection();
+    currentDialog = null;
+    currentDialog = new TwoInputDialog();
+
+    const userInput = await currentDialog.waitForUserInput();
+
+    const startVertex = graph.findVertexByLabel(userInput[0]);
+    if(!startVertex) return;
+    const destinationVertex = graph.findVertexByLabel(userInput[1]);
+    if(!destinationVertex) return;
+
+    graphAlgorithms.findShortestPath(graph, startVertex, destinationVertex);
+};
+
+toolbar.shortestPathBtn.addEventListener('click', shortestPathBtnListener);
 
 const beforeUnloadListener = () => {
     graph.updateGraph();

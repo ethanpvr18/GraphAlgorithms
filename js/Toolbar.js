@@ -51,6 +51,12 @@ export class Toolbar {
         this.mstBtn.classList.add('btn');
         this.mstBtn.classList.add('dropdown-button');
 
+        this.shortestPathBtn = document.createElement('input');
+        this.shortestPathBtn.type = 'button';
+        this.shortestPathBtn.value = 'Shortest Path';
+        this.shortestPathBtn.classList.add('btn');
+        this.shortestPathBtn.classList.add('dropdown-button');
+
         this.fileDropdown = document.createElement('div');
         this.fileDropdown.classList.add('dropdown');
 
@@ -87,6 +93,7 @@ export class Toolbar {
         this.runDropdownContent.appendChild(this.bfsBtn);
         this.runDropdownContent.appendChild(this.topoSortBtn);
         this.runDropdownContent.appendChild(this.mstBtn);
+        this.runDropdownContent.appendChild(this.shortestPathBtn);
 
         this.runDropdown.appendChild(this.runDropdownTitle);
         this.runDropdown.appendChild(this.runDropdownContent);
