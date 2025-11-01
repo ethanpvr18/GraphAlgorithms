@@ -16,7 +16,8 @@ export class Edge {
 
         this.edgeFlow = document.createElement('div');
         this.edgeFlow.classList.add('edge-flow');
-        
+        this.edgeFlow.textContent = this.flow;
+
         this.edgeArrow = document.createElement('div');
         this.edgeArrow.classList.add('edge-arrow');
 
