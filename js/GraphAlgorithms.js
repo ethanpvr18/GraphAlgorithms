@@ -154,7 +154,7 @@ export class GraphAlgorithms {
         }
     }
 
-    async createMst(graph) {
+    async createMst(graph, rootVertex) {
         if(this.result) {
             this.result.remove();
             this.result = new Result();
@@ -163,39 +163,30 @@ export class GraphAlgorithms {
         }
         this.result.clear();
         this.result.add('Minimum Spanning Tree');
-
-        let safeEdge = this.getSafeEdge(graph);
-
-        while(safeEdge != null) {
-            safeEdge.select();
-
-            for(let v of graph.vertices) {
-                if(safeEdge.u == v && !v.element.classList.contains('selected'))
-                    v.select();
-                if(safeEdge.v == v && !v.element.classList.contains('selected'))
-                    v.select();
-            }
-
-            await this.wait();
-            safeEdge = this.getSafeEdge(graph);
-        }
-        
-    }
-
-    getSafeEdge(graph) {
-        let safeEdge = null;
+    
         for (let vertex of graph.vertices) {
-            for (let edge of vertex.adjEdges) {
-                if(safeEdge == null) {
-                    if(!edge.element.classList.contains('selected') && !edge.u.element.classList.contains('selected') && !edge.v.element.classList.contains('selected')) {
-                        safeEdge = edge;
-                    }
-                } else if (safeEdge.weight > edge.weight) {
-                    if(!edge.element.classList.contains('selected') && !edge.u.element.classList.contains('selected') && !edge.v.element.classList.contains('selected')) {
-                        safeEdge = edge;
-                    }
-                } else {
-                    return safeEdge;
+            vertex.setKey(Infinity);
+            vertex.setPredecessor(null);
+        }
+
+        rootVertex.setKey(0);
+
+        let queue = new Queue();
+        
+        for (let vertex of graph.vertices) {
+            queue.enqueue(vertex);
+        }
+
+        while(!queue.isEmpty()) {
+            let currentVertex = queue.dequeue();
+            currentVertex.select('red');
+            this.result.add(currentVertex.getLabel());
+            await this.wait();
+
+            for (let vertex of currentVertex.adjEdges) {
+                if(queue.contains(vertex) && graph.findEdgeByVertices(currentVertex, vertex).getWeight() < vertex.getKey()) {
+                    vertex.setPredecessor(currentVertex);
+                    vertex.setKey(graph.findEdgeByVertices(currentVertex, vertex).getWeight());
                 }
             }
         }
