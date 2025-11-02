@@ -384,8 +384,14 @@ const mstBtnListener = async () => {
             toolbar.controlsDialog.style.display = 'none';
 
     graph.clearSelection();
+    currentDialog = null;
+    currentDialog = new Dialog();
+        
+    const userInput = await currentDialog.waitForUserInput();
+    const sourceVertex = graph.findVertexByLabel(userInput);
+    if(!sourceVertex) return;
 
-    graphAlgorithms.createMst(graph);
+    graphAlgorithms.createMst(graph, sourceVertex);
 };
 
 toolbar.mstBtn.addEventListener('click', mstBtnListener);
