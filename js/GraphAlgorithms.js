@@ -207,16 +207,23 @@ export class GraphAlgorithms {
     
         this.initializeSingleSource(graph, startVertex);
 
-        for (let vertex of graph.vertices) {
-            for (let edge of vertex.adjEdges) {
-                this.relax(edge.u, edge.v, edge.weight);
+        for (let i = 1; i < graph.vertices.getLength() - 1; i++) {
+            for (let vertex of graph.vertices) {
+                for (let edge of vertex.adjEdges) {
+                    this.relax(edge.u, edge.v, edge.getWeight());
+                }
             }
         }
-
+        
         for (let vertex of graph.vertices) {
             for (let edge of vertex.adjEdges) {
+                edge.select();
                 if(edge.v.getDistance() > edge.u.getDistance() + edge.weight) {
-
+                    edge.deselect();
+                }
+                if(edge.element.classList.contains('selected')) {
+                    this.result.add(edge.u.getLabel() + ' ' + edge.v.getLabel() + ' ');
+                    await this.wait();
                 }
             }
         }
@@ -254,17 +261,17 @@ export class GraphAlgorithms {
 
     initializeSingleSource(graph, s) {
         for(let v of graph.vertices) {
-            v.distance = Infinity;
-            v.predecessor = null;
+            v.setDistance(Infinity);
+            v.setPredecessor(null);
         }
 
-        s.distance = 0;
+        s.setDistance(0);
     }
 
     relax(u, v, w) {
-        if(v.distance > u.distance + w) {
-            v.distance = u.distance + w;
-            v.predecessor = u;
+        if(v.getDistance() > u.getDistance() + w) {
+            v.setDistance(u.getDistance() + w);
+            v.setPredecessor(u);
         }
     }
 
