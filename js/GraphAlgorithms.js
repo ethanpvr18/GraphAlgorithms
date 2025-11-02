@@ -245,6 +245,14 @@ export class GraphAlgorithms {
                 edge.flow = 0;
             }
         }
+
+        // let cost = 0;
+
+        // if(edge) {
+        //     edge.flow = edge.flow + cost;
+        // } else {
+        //     edge.flow = edge.flow - cost;
+        // }
     }
 
     async findMaxMatch(graph) {
