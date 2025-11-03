@@ -1,5 +1,5 @@
 export class Edge {
-    constructor(u, v, weight=1, isDirected=true, flow=1, capacity=1) {
+    constructor(u, v, weight=1, isDirected=true, flow=0, capacity=1) {
         this.u = u;
         this.v = v;
         this.weight = weight;

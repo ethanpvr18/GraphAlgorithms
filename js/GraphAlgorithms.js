@@ -1,5 +1,6 @@
 import { LinkedList } from './LinkedList.js';
 import { Queue } from './Queue.js';
+import { Stack } from './Stack.js';
 import { Set } from './Set.js';
 import { Result } from './Result.js';
 
@@ -204,31 +205,55 @@ export class GraphAlgorithms {
         this.result.clear();
         this.result.add('Shortest Path: ');
         await this.wait();
-
-        startVertex.select();
     
         this.initializeSingleSource(graph, startVertex);
 
         for (let i = 1; i < graph.vertices.getLength() - 1; i++) {
             for (let vertex of graph.vertices) {
                 for (let edge of vertex.adjEdges) {
-                    this.relax(edge.u, edge.v, edge.getWeight());
+                    this.relax(edge.getVertexU(), edge.getVertexV(), edge.getWeight());
                 }
             }
         }
         
         for (let vertex of graph.vertices) {
             for (let edge of vertex.adjEdges) {
-                edge.select();
-                if(edge.v.getDistance() > edge.u.getDistance() + edge.weight) {
-                    edge.deselect();
-                }
-                if(edge.element.classList.contains('selected')) {
-                    this.result.add(edge.u.getLabel() + ' ' + edge.v.getLabel() + ' ');
-                    await this.wait();
+                if(edge.getVertexV().getDistance() > edge.getVertexU().getDistance() + edge.getWeight()) {
+                    return;
                 }
             }
         }
+
+        let stack = new Stack();
+    
+        let currentVertex = destinationVertex;
+
+        while(currentVertex != startVertex) {
+            stack.push(currentVertex);
+            currentVertex = currentVertex.getPredecessor();
+        }
+
+        startVertex.select();
+        this.result.add(startVertex.getLabel());
+        await this.wait();
+
+        while(!stack.isEmpty()) {
+            
+            currentVertex = stack.pop();
+            
+            if(currentVertex != null && startVertex != null) {
+                let currentEdge = graph.findEdgeByVertices(startVertex, currentVertex);
+                currentEdge.select();
+                await this.wait();
+            }
+
+            currentVertex.select();
+            this.result.add(currentVertex.getLabel());
+            await this.wait();
+
+            startVertex = currentVertex;
+        }
+
     }
 
     async findMaxFlow(graph, sourceVertex, sinkVertex) {
@@ -244,20 +269,23 @@ export class GraphAlgorithms {
 
         for (let vertex of graph.vertices) {
             for (let edge of vertex.adjEdges) {
-                edge.setWeight(edge.getWeight() * 2);
-
-                // edge.flow = 0;
+                edge.setFlow(0);
             }
         }
 
+        let cost = 0;
 
-        // let cost = 0;
+        if(edge) {
+            edge.setFlow(edge.getFlow() + cost);
+            edge.deselect();
+            edge.select('red');
+        } else {
+            edge.setFlow(edge.getFlow() - cost);
+            edge.deselect();
+            edge.select('red');
+        }
 
-        // if(edge) {
-        //     edge.flow = edge.flow + cost;
-        // } else {
-        //     edge.flow = edge.flow - cost;
-        // }
+        await this.wait();
     }
 
     async findMaxMatch(graph) {
