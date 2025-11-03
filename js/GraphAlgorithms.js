@@ -244,9 +244,12 @@ export class GraphAlgorithms {
 
         for (let vertex of graph.vertices) {
             for (let edge of vertex.adjEdges) {
-                edge.flow = 0;
+                edge.setWeight(edge.getWeight() * 2);
+
+                // edge.flow = 0;
             }
         }
+
 
         // let cost = 0;
 
