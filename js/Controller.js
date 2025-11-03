@@ -475,6 +475,45 @@ const bellmanFordShortestPathBtnListener = async () => {
 
 toolbar.bellmanFordShortestPathBtn.addEventListener('click', bellmanFordShortestPathBtnListener);
 
+const floydWarshallShortestPathBtnListener = async () => {
+    if(toolbar.controlsDialog.style.display == 'block')
+            toolbar.controlsDialog.style.display = 'none';
+
+    graph.clearSelection();
+    currentDialog = null;
+    currentDialog = new TwoInputDialog();
+
+    const userInput = await currentDialog.waitForUserInput();
+
+    const startVertex = graph.findVertexByLabel(userInput[0]);
+    if(!startVertex) return;
+    const destinationVertex = graph.findVertexByLabel(userInput[1]);
+    if(!destinationVertex) return;
+
+    graphAlgorithms.findShortestPath(graph, startVertex, destinationVertex);
+};
+
+toolbar.floydWarshallShortestPathBtn.addEventListener('click', floydWarshallShortestPathBtnListener);
+
+const johnsonsShortestPathBtnListener = async () => {
+    if(toolbar.controlsDialog.style.display == 'block')
+            toolbar.controlsDialog.style.display = 'none';
+
+    graph.clearSelection();
+    currentDialog = null;
+    currentDialog = new TwoInputDialog();
+
+    const userInput = await currentDialog.waitForUserInput();
+
+    const startVertex = graph.findVertexByLabel(userInput[0]);
+    if(!startVertex) return;
+    const destinationVertex = graph.findVertexByLabel(userInput[1]);
+    if(!destinationVertex) return;
+
+    graphAlgorithms.findShortestPath(graph, startVertex, destinationVertex);
+};
+
+toolbar.johnsonsShortestPathBtn.addEventListener('click', johnsonsShortestPathBtnListener);
 
 const maxFlowBtnListener = async () => {
     if(toolbar.controlsDialog.style.display == 'block')
