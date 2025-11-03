@@ -295,7 +295,7 @@ input {
 
 .dropdown-content .dropdown-button {
     display: block;
-    min-width: 12rem;
+    min-width: 18rem;
     text-align: left;
     z-index: 14;
     cursor: pointer;
