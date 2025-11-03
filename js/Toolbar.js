@@ -57,17 +57,29 @@ export class Toolbar {
         this.mstKruskalsBtn.classList.add('btn');
         this.mstKruskalsBtn.classList.add('dropdown-button');
 
-        this.shortestPathBtn = document.createElement('input');
-        this.shortestPathBtn.type = 'button';
-        this.shortestPathBtn.value = 'Shortest Path';
-        this.shortestPathBtn.classList.add('btn');
-        this.shortestPathBtn.classList.add('dropdown-button');
+        this.djikstrasShortestPathBtn = document.createElement('input');
+        this.djikstrasShortestPathBtn.type = 'button';
+        this.djikstrasShortestPathBtn.value = 'Shortest Path - Djikstra\'s Algorithm';
+        this.djikstrasShortestPathBtn.classList.add('btn');
+        this.djikstrasShortestPathBtn.classList.add('dropdown-button');
+
+        this.bellmanFordShortestPathBtn = document.createElement('input');
+        this.bellmanFordShortestPathBtn.type = 'button';
+        this.bellmanFordShortestPathBtn.value = 'Shortest Path - Bellman-Ford Algorithm';
+        this.bellmanFordShortestPathBtn.classList.add('btn');
+        this.bellmanFordShortestPathBtn.classList.add('dropdown-button');
 
         this.maxFlowBtn = document.createElement('input');
         this.maxFlowBtn.type = 'button';
-        this.maxFlowBtn.value = 'Maximum Flow';
+        this.maxFlowBtn.value = 'Maximum Flow - Generic Algorithm';
         this.maxFlowBtn.classList.add('btn');
         this.maxFlowBtn.classList.add('dropdown-button');
+
+        this.maxFlowFFBtn = document.createElement('input');
+        this.maxFlowFFBtn.type = 'button';
+        this.maxFlowFFBtn.value = 'Maximum Flow - Ford-Fulkerson Algorithm';
+        this.maxFlowFFBtn.classList.add('btn');
+        this.maxFlowFFBtn.classList.add('dropdown-button');
 
         this.maxMatchBtn = document.createElement('input');
         this.maxMatchBtn.type = 'button';
