@@ -45,11 +45,17 @@ export class Toolbar {
         this.topoSortBtn.classList.add('btn');
         this.topoSortBtn.classList.add('dropdown-button');
 
-        this.mstBtn = document.createElement('input');
-        this.mstBtn.type = 'button';
-        this.mstBtn.value = 'Minimum Spanning Tree';
-        this.mstBtn.classList.add('btn');
-        this.mstBtn.classList.add('dropdown-button');
+        this.mstPrimsBtn = document.createElement('input');
+        this.mstPrimsBtn.type = 'button';
+        this.mstPrimsBtn.value = 'Minimum Spanning Tree - Prim\'s Algorithm';
+        this.mstPrimsBtn.classList.add('btn');
+        this.mstPrimsBtn.classList.add('dropdown-button');
+
+        this.mstKruskalsBtn = document.createElement('input');
+        this.mstKruskalsBtn.type = 'button';
+        this.mstKruskalsBtn.value = 'Minimum Spanning Tree - Kruskal\'s Algorithm';
+        this.mstKruskalsBtn.classList.add('btn');
+        this.mstKruskalsBtn.classList.add('dropdown-button');
 
         this.shortestPathBtn = document.createElement('input');
         this.shortestPathBtn.type = 'button';

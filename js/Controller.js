@@ -378,7 +378,7 @@ const topoSortBtnListener = async () => {
 
 toolbar.topoSortBtn.addEventListener('click', topoSortBtnListener);
 
-const mstBtnListener = async () => {
+const mstPrimsBtnListener = async () => {
 
     if(toolbar.controlsDialog.style.display == 'block')
             toolbar.controlsDialog.style.display = 'none';
@@ -394,7 +394,26 @@ const mstBtnListener = async () => {
     graphAlgorithms.createMst(graph, sourceVertex);
 };
 
-toolbar.mstBtn.addEventListener('click', mstBtnListener);
+toolbar.mstPrimsBtn.addEventListener('click', mstPrimsBtnListener);
+
+const mstKruskalsBtnListener = async () => {
+
+    if(toolbar.controlsDialog.style.display == 'block')
+            toolbar.controlsDialog.style.display = 'none';
+
+    graph.clearSelection();
+    currentDialog = null;
+    currentDialog = new Dialog();
+        
+    const userInput = await currentDialog.waitForUserInput();
+    const sourceVertex = graph.findVertexByLabel(userInput);
+    if(!sourceVertex) return;
+
+    graphAlgorithms.createMst(graph, sourceVertex);
+};
+
+toolbar.mstKruskalsBtn.addEventListener('click', mstKruskalsBtnListener);
+
 
 const shortestPathBtnListener = async () => {
     if(toolbar.controlsDialog.style.display == 'block')
