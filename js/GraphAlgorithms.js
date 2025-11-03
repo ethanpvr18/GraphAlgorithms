@@ -178,7 +178,7 @@ export class GraphAlgorithms {
             verticesArray.push(vertex);
         }
 
-        while(!queue.isEmpty()) {
+        while(verticesArray.getLength() > 0) {
 
             let minIndex = 0;
 
