@@ -87,11 +87,20 @@ export class Edge {
     getFlow() { return this.flow }
     getCapacity() { return this.capacity }
 
-    setWeight(weight) { this.weight = weight; }
+    setWeight(weight) { 
+        this.weight = weight; 
+        this.edgeWeight.textContent = this.weight;
+    }
+
     setVertexU(u) { this.u = u; }
     setVertexV(v) { this.v = v; }
     setIsDirected(isDirected) { this.isDirected = isDirected; }
-    setFlow(flow) { this.flow = flow; }
+
+    setFlow(flow) { 
+        this.flow = flow; 
+        this.edgeFlow.textContent = this.flow;
+    }
+
     setCapacity(capacity) { this.capacity = capacity; }
 
     select(color='red') {
