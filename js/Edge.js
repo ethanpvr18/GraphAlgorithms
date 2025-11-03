@@ -90,6 +90,7 @@ export class Edge {
     setWeight(weight) { 
         this.weight = weight; 
         this.edgeWeight.textContent = this.weight;
+        this.update();
     }
 
     setVertexU(u) { this.u = u; }
@@ -99,6 +100,7 @@ export class Edge {
     setFlow(flow) { 
         this.flow = flow; 
         this.edgeFlow.textContent = this.flow;
+        this.update();
     }
 
     setCapacity(capacity) { this.capacity = capacity; }
