@@ -414,27 +414,6 @@ const mstKruskalsBtnListener = async () => {
 
 toolbar.mstKruskalsBtn.addEventListener('click', mstKruskalsBtnListener);
 
-
-const shortestPathBtnListener = async () => {
-    if(toolbar.controlsDialog.style.display == 'block')
-            toolbar.controlsDialog.style.display = 'none';
-
-    graph.clearSelection();
-    currentDialog = null;
-    currentDialog = new TwoInputDialog();
-
-    const userInput = await currentDialog.waitForUserInput();
-
-    const startVertex = graph.findVertexByLabel(userInput[0]);
-    if(!startVertex) return;
-    const destinationVertex = graph.findVertexByLabel(userInput[1]);
-    if(!destinationVertex) return;
-
-    graphAlgorithms.findShortestPath(graph, startVertex, destinationVertex);
-};
-
-toolbar.shortestPathBtn.addEventListener('click', shortestPathBtnListener);
-
 const djikstrasShortestPathBtnListener = async () => {
     if(toolbar.controlsDialog.style.display == 'block')
             toolbar.controlsDialog.style.display = 'none';
