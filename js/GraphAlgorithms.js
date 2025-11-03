@@ -184,9 +184,11 @@ export class GraphAlgorithms {
             await this.wait();
 
             for (let vertex of currentVertex.adjEdges) {
-                if(queue.contains(vertex) && graph.findEdgeByVertices(currentVertex, vertex).getWeight() < vertex.getKey()) {
+                let currentEdge = graph.findEdgeByVertices(currentVertex, vertex);
+                currentEdge.select('red');
+                if(queue.contains(vertex) && currentEdge.getWeight() < vertex.getKey()) {
                     vertex.setPredecessor(currentVertex);
-                    vertex.setKey(graph.findEdgeByVertices(currentVertex, vertex).getWeight());
+                    vertex.setKey(currentEdge.getWeight());
                 }
             }
         }
