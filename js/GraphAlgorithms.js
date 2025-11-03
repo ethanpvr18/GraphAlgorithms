@@ -178,11 +178,11 @@ export class GraphAlgorithms {
             verticesArray.push(vertex);
         }
 
-        while(verticesArray.getLength() > 0) {
+        while(verticesArray.length > 0) {
 
             let minIndex = 0;
 
-            for (let i = 0; i < verticesArray.getLength(); i++) {
+            for (let i = 0; i < verticesArray.length; i++) {
                 if(verticesArray[i].getKey() < verticesArray[minIndex].getKey())
                     minIndex = i;
             }
@@ -190,13 +190,26 @@ export class GraphAlgorithms {
             let currentVertex = verticesArray[minIndex];
             verticesArray.splice(minIndex, 1);
             currentVertex.select('red');
+
+            if(currentVertex.getPredecessor()) {
+                let currentEdge = graph.findEdgeByVertices(currentVertex, currentVertex.getPredecessor());
+                if(currentEdge)
+                    currentEdge.select('red');
+            }
+
             this.result.add(currentVertex.getLabel());
             await this.wait();
 
             for (let vertex of currentVertex.adjEdges) {
                 let currentEdge = graph.findEdgeByVertices(currentVertex, vertex);
-                currentEdge.select('red');
-                if(queue.contains(vertex) && currentEdge.getWeight() < vertex.getKey()) {
+                let found = false;
+
+                for (let i = 0; i < verticesArray.length; i++) {
+                    if(verticesArray[i] == vertex)
+                        found = true;
+                }
+
+                if(found && currentEdge.getWeight() < vertex.getKey()) {
                     vertex.setPredecessor(currentVertex);
                     vertex.setKey(currentEdge.getWeight());
                 }
