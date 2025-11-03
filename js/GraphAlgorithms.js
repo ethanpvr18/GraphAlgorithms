@@ -172,14 +172,23 @@ export class GraphAlgorithms {
 
         rootVertex.setKey(0);
 
-        let queue = new Queue();
+        let verticesArray = [];
         
         for (let vertex of graph.vertices) {
-            queue.enqueue(vertex);
+            verticesArray.push(vertex);
         }
 
         while(!queue.isEmpty()) {
-            let currentVertex = queue.dequeue();
+
+            let minIndex = 0;
+
+            for (let i = 0; i < verticesArray.getLength(); i++) {
+                if(verticesArray[i].getKey() < verticesArray[minIndex].getKey())
+                    minIndex = i;
+            }
+
+            let currentVertex = verticesArray[minIndex];
+            verticesArray.splice(minIndex, 1);
             currentVertex.select('red');
             this.result.add(currentVertex.getLabel());
             await this.wait();
