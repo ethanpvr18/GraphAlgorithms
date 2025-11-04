@@ -190,7 +190,7 @@ export class Graph {
                     const sinkVertex = this.findVertexByLabel(e.v);
 
                     if(sourceVertex && sinkVertex)
-                        sourceVertex.connect(this, sinkVertex, e.getWeight());
+                        sourceVertex.connect(this, sinkVertex, e.weight);
                 }
             }
 
