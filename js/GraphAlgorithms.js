@@ -307,6 +307,14 @@ export class GraphAlgorithms {
                     reverseEdge.setFlow(edge.getFlow() - residualCapacity);
             }
         }
+
+        let totalFlow = 0;
+        
+        for (let edge of sourceVertex.adjEdges) {            
+            totalFlow += edge.getFlow();
+        }
+
+        this.result.add(`Maximum Flow = ${totalFlow}`);
         
     }
 
