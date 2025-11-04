@@ -137,10 +137,10 @@ export class Graph {
             adjEdges: v.adjEdges.map(e => ({
                 u: e.u.label,
                 v: e.v.label,
-                weight: e.getWeight(),
+                weight: e.weight,
                 isDirected: e.isDirected,
                 flow: e.flow,
-                capacity: e.getCapacity()
+                capacity: e.capacity
             })),
             x: parseFloat(v.element.style.left) || v.x,
             y: parseFloat(v.element.style.top) || v.y,
@@ -216,7 +216,7 @@ export class Graph {
             adjEdges: v.adjEdges.map(e => ({
                 u: e.u.label,
                 v: e.v.label,
-                weight: e.getWeight(),
+                weight: e.weight,
                 isDirected: e.isDirected,
                 flow: e.flow,
                 capacity: e.getCapacity()
