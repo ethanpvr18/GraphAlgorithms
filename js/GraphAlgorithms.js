@@ -291,22 +291,20 @@ export class GraphAlgorithms {
         this.result.add('Maximum Flow: ');
         await this.wait();
 
-        for (let vertex in graph.vertices) {            
-            for (let edge in vertex.adjEdges) {            
+        for (let vertex of graph.vertices) {            
+            for (let edge of vertex.adjEdges) {            
                 edge.setFlow(0);
             }
         }
 
         while(this.hasPath(graph, sourceVertex, sinkVertex)) {
-            for (let edge in this.getPath(graph, s, v)) {
+            for (let edge of this.getPath(graph, s, v)) {
                 let residualCapacity = edge.getCapacity() - edge.getFlow()
-                if(edge) {
-                    edge.setFlow(edge.getFlow() + residualCapacity);
-                } else {
-                    let reverseEdge = graph.findEdgeByVertices(edge.getVertexV, edge.getVertexU);
-                    if(reverseEdge)
-                        reverseEdge.setFlow(edge.getFlow() - residualCapacity);
-                }
+                edge.setFlow(edge.getFlow() + residualCapacity);
+
+                let reverseEdge = graph.findEdgeByVertices(edge.getVertexV, edge.getVertexU);
+                if(reverseEdge)
+                    reverseEdge.setFlow(edge.getFlow() - residualCapacity);
             }
         }
         
