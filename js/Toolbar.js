@@ -47,49 +47,49 @@ export class Toolbar {
 
         this.mstPrimsBtn = document.createElement('input');
         this.mstPrimsBtn.type = 'button';
-        this.mstPrimsBtn.value = 'Minimum Spanning Tree - Prim\'s Algorithm';
+        this.mstPrimsBtn.value = 'Minimum Spanning Tree';
         this.mstPrimsBtn.classList.add('btn');
         this.mstPrimsBtn.classList.add('dropdown-button');
 
         this.mstKruskalsBtn = document.createElement('input');
         this.mstKruskalsBtn.type = 'button';
-        this.mstKruskalsBtn.value = 'Minimum Spanning Tree - Kruskal\'s Algorithm';
+        this.mstKruskalsBtn.value = 'Minimum Spanning Tree';
         this.mstKruskalsBtn.classList.add('btn');
         this.mstKruskalsBtn.classList.add('dropdown-button');
 
         this.djikstrasShortestPathBtn = document.createElement('input');
         this.djikstrasShortestPathBtn.type = 'button';
-        this.djikstrasShortestPathBtn.value = 'Shortest Path - Djikstra\'s Algorithm';
+        this.djikstrasShortestPathBtn.value = 'Shortest Path';
         this.djikstrasShortestPathBtn.classList.add('btn');
         this.djikstrasShortestPathBtn.classList.add('dropdown-button');
 
         this.bellmanFordShortestPathBtn = document.createElement('input');
         this.bellmanFordShortestPathBtn.type = 'button';
-        this.bellmanFordShortestPathBtn.value = 'Shortest Path - Bellman-Ford Algorithm';
+        this.bellmanFordShortestPathBtn.value = 'Shortest Path';
         this.bellmanFordShortestPathBtn.classList.add('btn');
         this.bellmanFordShortestPathBtn.classList.add('dropdown-button');
 
         this.floydWarshallShortestPathBtn = document.createElement('input');
         this.floydWarshallShortestPathBtn.type = 'button';
-        this.floydWarshallShortestPathBtn.value = 'Shortest Path - Floyd-Warshall\'s Algorithm';
+        this.floydWarshallShortestPathBtn.value = 'Shortest Path';
         this.floydWarshallShortestPathBtn.classList.add('btn');
         this.floydWarshallShortestPathBtn.classList.add('dropdown-button');
 
         this.johnsonsShortestPathBtn = document.createElement('input');
         this.johnsonsShortestPathBtn.type = 'button';
-        this.johnsonsShortestPathBtn.value = 'Shortest Path - Johnson\'s Algorithm';
+        this.johnsonsShortestPathBtn.value = 'Shortest Path';
         this.johnsonsShortestPathBtn.classList.add('btn');
         this.johnsonsShortestPathBtn.classList.add('dropdown-button');
 
         this.maxFlowBtn = document.createElement('input');
         this.maxFlowBtn.type = 'button';
-        this.maxFlowBtn.value = 'Maximum Flow - Generic Algorithm';
+        this.maxFlowBtn.value = 'Maximum Flow';
         this.maxFlowBtn.classList.add('btn');
         this.maxFlowBtn.classList.add('dropdown-button');
 
         this.maxFlowFFBtn = document.createElement('input');
         this.maxFlowFFBtn.type = 'button';
-        this.maxFlowFFBtn.value = 'Maximum Flow - Ford-Fulkerson Algorithm';
+        this.maxFlowFFBtn.value = 'Maximum Flow';
         this.maxFlowFFBtn.classList.add('btn');
         this.maxFlowFFBtn.classList.add('dropdown-button');
 
@@ -135,13 +135,13 @@ export class Toolbar {
         this.runDropdownContent.appendChild(this.bfsBtn);
         this.runDropdownContent.appendChild(this.topoSortBtn);
         this.runDropdownContent.appendChild(this.mstPrimsBtn);
-        this.runDropdownContent.appendChild(this.mstKruskalsBtn);
+        // this.runDropdownContent.appendChild(this.mstKruskalsBtn);
         this.runDropdownContent.appendChild(this.djikstrasShortestPathBtn);
-        this.runDropdownContent.appendChild(this.bellmanFordShortestPathBtn);
-        this.runDropdownContent.appendChild(this.floydWarshallShortestPathBtn);
-        this.runDropdownContent.appendChild(this.johnsonsShortestPathBtn);
+        // this.runDropdownContent.appendChild(this.bellmanFordShortestPathBtn);
+        // this.runDropdownContent.appendChild(this.floydWarshallShortestPathBtn);
+        // this.runDropdownContent.appendChild(this.johnsonsShortestPathBtn);
         this.runDropdownContent.appendChild(this.maxFlowBtn);
-        this.runDropdownContent.appendChild(this.maxFlowFFBtn);
+        // this.runDropdownContent.appendChild(this.maxFlowFFBtn);
         this.runDropdownContent.appendChild(this.maxMatchBtn);
 
         this.runDropdown.appendChild(this.runDropdownTitle);

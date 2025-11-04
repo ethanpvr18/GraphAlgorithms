@@ -302,10 +302,10 @@ export class GraphAlgorithms {
         while(this.hasPath(graph, sourceVertex, sinkVertex)) {
             for (let vertex in graph.vertices) {            
                 for (let edge in vertex.adjEdges) {            
-                    if(edge) {
-                        edge.setFlow(0);
+                    if(edge.getFlow() + edge.getWeight() <= edge.getCapacity()) {
+                        edge.setFlow(edge.getFlow() + edge.getWeight());
                     } else {
-                        edge.setFlow(0);
+                        edge.setFlow(edge.getFlow() - edge.getWeight());
                     }
                 }
             }
