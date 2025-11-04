@@ -1,7 +1,7 @@
 export class Stack {
     constructor() {
         this.top = null;
-        this.numOfEntries = null;
+        this.numOfEntries = 0;
 
         this.Node = class {
             constructor(data, nextNode) {
@@ -33,6 +33,9 @@ export class Stack {
     }
 
     pop() {
+        if(this.isEmpty())
+            return undefined;
+        
         let result = this.peek();
         this.top = this.top.getNextNode();
         this.numOfEntries--;
@@ -41,13 +44,13 @@ export class Stack {
     }
 
     peek() {
-        if(!this.isEmpty()) {
-            return this.top.getData();
-        }
+        if(this.isEmpty())
+            return undefined;
+        return this.top.getData();
     }
 
     isEmpty() {
-        return top == null;
+        return this.top == null;
     }
 
     clear() {

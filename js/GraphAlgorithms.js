@@ -11,6 +11,7 @@ export class GraphAlgorithms {
 
         this.time = 0;
         this.topoSortedList = new LinkedList();
+        this.path = [];
     }
     
     async dfs(graph, sourceVertex) {
@@ -44,7 +45,7 @@ export class GraphAlgorithms {
             for(let e of u.adjEdges) {
                 if(e.getVertexV().getColor() === 'white') {
                     e.getVertexV().setPredecessor(u);
-                    e.select('light red');
+                    e.select();
                     await this.wait();
                     await this.dfsVisit(graph, e.getVertexV());
                 }
@@ -53,7 +54,7 @@ export class GraphAlgorithms {
             this.incrementTime(1);
             u.setFinishTime(this.getTime());
             u.setColor('black');
-            u.select('red');
+            u.select();
             this.result.add(u.getLabel());
             await this.wait();
         }
@@ -95,14 +96,14 @@ export class GraphAlgorithms {
                     e.getVertexV().setColor('gray');
                     e.getVertexV().setDistance(u.getDistance() + 1);
                     e.getVertexV().setPredecessor(u);
-                    e.select('light red');
+                    e.select('red');
                     await this.wait();
                     queue.enqueue(e.getVertexV());
                 }
             }
 
             u.setColor('black');
-            u.select('red');
+            u.select();
             this.result.add(u.getLabel());
             await this.wait();
         }
@@ -139,7 +140,7 @@ export class GraphAlgorithms {
             for(let e of u.adjEdges) {
                 if(e.getVertexV().getColor() === 'white') {
                     e.getVertexV().setPredecessor(u);
-                    e.select('light red');
+                    e.select();
                     await this.wait();
                     await this.topoSortVisit(graph, e.getVertexV());
                 }
@@ -149,7 +150,7 @@ export class GraphAlgorithms {
             u.setFinishTime(this.getTime());
             this.topoSortedList.add(u);
             u.setColor('black');
-            u.select('red');
+            u.select();
             this.result.add(u.getLabel());
             await this.wait();
         }
@@ -189,29 +190,30 @@ export class GraphAlgorithms {
 
             let currentVertex = verticesArray[minIndex];
             verticesArray.splice(minIndex, 1);
-            currentVertex.select('red');
+            currentVertex.select();
 
-            if(currentVertex.getPredecessor()) {
-                let currentEdge = graph.findEdgeByVertices(currentVertex, currentVertex.getPredecessor());
-                if(currentEdge)
-                    currentEdge.select('red');
+            if(currentVertex.getPredecessor() != null) {
+                let currentEdge = graph.findEdgeByVertices(currentVertex.getPredecessor(), currentVertex);
+                
+                if(currentEdge != null)
+                    currentEdge.select();
             }
 
             this.result.add(currentVertex.getLabel());
             await this.wait();
 
-            for (let vertex of currentVertex.adjEdges) {
-                let currentEdge = graph.findEdgeByVertices(currentVertex, vertex);
+            for (let edge of currentVertex.adjEdges) {
+                let currentEdge = graph.findEdgeByVertices(currentVertex, edge.getVertexV());
                 let found = false;
 
                 for (let i = 0; i < verticesArray.length; i++) {
-                    if(verticesArray[i] == vertex)
+                    if(verticesArray[i] == edge.getVertexV())
                         found = true;
                 }
 
-                if(found && currentEdge.getWeight() < vertex.getKey()) {
-                    vertex.setPredecessor(currentVertex);
-                    vertex.setKey(currentEdge.getWeight());
+                if(found && currentEdge.getWeight() < edge.getVertexV().getKey()) {
+                    edge.getVertexV().setPredecessor(currentVertex);
+                    edge.getVertexV().setKey(currentEdge.getWeight());
                 }
             }
         }
@@ -289,25 +291,26 @@ export class GraphAlgorithms {
         this.result.add('Maximum Flow: ');
         await this.wait();
 
-        for (let vertex of graph.vertices) {
-            for (let edge of vertex.adjEdges) {
+        console.log(graph.vertices);
+
+        for (let vertex in graph.vertices) {            
+            for (let edge in vertex.adjEdges) {            
                 edge.setFlow(0);
             }
         }
 
-        let cost = 0;
-
-        if(edge) {
-            edge.setFlow(edge.getFlow() + cost);
-            edge.deselect();
-            edge.select('red');
-        } else {
-            edge.setFlow(edge.getFlow() - cost);
-            edge.deselect();
-            edge.select('red');
+        while(this.hasPath(graph, sourceVertex, sinkVertex)) {
+            for (let vertex in graph.vertices) {            
+                for (let edge in vertex.adjEdges) {            
+                    if(edge) {
+                        edge.setFlow(0);
+                    } else {
+                        edge.setFlow(0);
+                    }
+                }
+            }
         }
-
-        await this.wait();
+        
     }
 
     async findMaxMatch(graph) {
@@ -338,19 +341,14 @@ export class GraphAlgorithms {
         }
     }
 
-    printPath(graph, s, v) {
-        if(this.result === null)
-            this.result = new Result();
-        this.result.clear();
-        this.result.add('Path: ');
-
+    hasPath(graph, s, v) {
         if(v == s) {
-            this.result.add(s.getLabel());
-        } else if(v.predecessor == null) {
-            this.result.add('No path exists.');
+            return false;
+        } else if(v.getPredecessor() == null) {
+            return false;
         } else {
-            printPath(graph, s, v.predecessor);
-            this.result.add(v.getLabel());
+            this.hasPath(graph, s, v.getPredecessor());
+            return true;
         }
     }
 

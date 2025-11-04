@@ -85,6 +85,7 @@ export class Vertex {
 
     connect(graph, v, weight=1) {
         if (!graph.findEdgeByVertices(this, v) && this instanceof Vertex && v instanceof Vertex) {
+            v.setPredecessor(this);
             const edge = new Edge(this, v, weight);
             this.adjEdges.add(edge);
             this.deselect(); 
