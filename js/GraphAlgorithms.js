@@ -301,10 +301,11 @@ export class GraphAlgorithms {
             for (let edge of this.getPath(graph, s, v)) {
                 let residualCapacity = edge.getCapacity() - edge.getFlow()
                 edge.setFlow(edge.getFlow() + residualCapacity);
+                edge.select(`rgba(255, 0, 0, ${edge.getFlow() / edge.getCapacity()})`);
 
-                let reverseEdge = graph.findEdgeByVertices(edge.getVertexV, edge.getVertexU);
-                if(reverseEdge)
-                    reverseEdge.setFlow(edge.getFlow() - residualCapacity);
+                // let reverseEdge = graph.findEdgeByVertices(edge.getVertexV, edge.getVertexU);
+                // if(reverseEdge)
+                //     reverseEdge.setFlow(edge.getFlow() - residualCapacity);
             }
         }
 
