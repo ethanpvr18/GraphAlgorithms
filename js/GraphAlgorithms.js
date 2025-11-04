@@ -363,7 +363,6 @@ export class GraphAlgorithms {
         }
     }
 
-
     wait() { return new Promise(resolve => setTimeout(resolve, 400)); }
     getTime() { return this.time; }
     resetTime() { this.time = 0; }
