@@ -64,7 +64,7 @@ export class Graph {
             for(let e of v.adjEdges) {
                 if(!e.element.classList.contains('selected')) {
                     minEdge = e;
-                    if(e !== minEdge && e.weight < minEdge.weight) {
+                    if(e !== minEdge && e.getWeight() < minEdge.getWeight()) {
                         minEdge = e;
                     }
                 }
@@ -137,10 +137,10 @@ export class Graph {
             adjEdges: v.adjEdges.map(e => ({
                 u: e.u.label,
                 v: e.v.label,
-                weight: e.weight,
+                weight: e.getWeight(),
                 isDirected: e.isDirected,
                 flow: e.flow,
-                capacity: e.capacity
+                capacity: e.getCapacity()
             })),
             x: parseFloat(v.element.style.left) || v.x,
             y: parseFloat(v.element.style.top) || v.y,
@@ -190,7 +190,7 @@ export class Graph {
                     const sinkVertex = this.findVertexByLabel(e.v);
 
                     if(sourceVertex && sinkVertex)
-                        sourceVertex.connect(this, sinkVertex, e.weight);
+                        sourceVertex.connect(this, sinkVertex, e.getWeight());
                 }
             }
 
@@ -216,10 +216,10 @@ export class Graph {
             adjEdges: v.adjEdges.map(e => ({
                 u: e.u.label,
                 v: e.v.label,
-                weight: e.weight,
+                weight: e.getWeight(),
                 isDirected: e.isDirected,
                 flow: e.flow,
-                capacity: e.capacity
+                capacity: e.getCapacity()
             })),
             x: parseFloat(v.element.style.left),
             y: parseFloat(v.element.style.top),
@@ -244,7 +244,7 @@ export class Graph {
                 const sinkVertex = this.findVertexByLabel(e.v);
 
                 if(sourceVertex != null && sinkVertex != null)
-                    sourceVertex.connect(this, sinkVertex, e.weight);
+                    sourceVertex.connect(this, sinkVertex, e.getWeight());
             }
         }
     }

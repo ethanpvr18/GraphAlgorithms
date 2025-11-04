@@ -44,7 +44,7 @@ export class Editor {
                         }
                     }
                     if(edge) {
-                        edge.weight = parseFloat(element.textContent);
+                        edge.setWeight(parseFloat(element.textContent));
                         if(edge.edgeWeight)
                             edge.edgeWeight.textContent = element.textContent;
                     }

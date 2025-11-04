@@ -90,6 +90,7 @@ export class Edge {
     setWeight(weight) { 
         this.weight = weight; 
         this.edgeWeight.textContent = this.weight;
+        this.setCapacity(this.weight);
         this.update();
     }
 

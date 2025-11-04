@@ -291,8 +291,6 @@ export class GraphAlgorithms {
         this.result.add('Maximum Flow: ');
         await this.wait();
 
-        console.log(graph.vertices);
-
         for (let vertex in graph.vertices) {            
             for (let edge in vertex.adjEdges) {            
                 edge.setFlow(0);
@@ -300,13 +298,14 @@ export class GraphAlgorithms {
         }
 
         while(this.hasPath(graph, sourceVertex, sinkVertex)) {
-            for (let vertex in graph.vertices) {            
-                for (let edge in vertex.adjEdges) {            
-                    if(edge.getFlow() + edge.getWeight() <= edge.getCapacity()) {
-                        edge.setFlow(edge.getFlow() + edge.getWeight());
-                    } else {
-                        edge.setFlow(edge.getFlow() - edge.getWeight());
-                    }
+            for (let edge in this.getPath(graph, s, v)) {
+                let residualCapacity = edge.getCapacity() - edge.getFlow()
+                if(edge) {
+                    edge.setFlow(edge.getFlow() + residualCapacity);
+                } else {
+                    let reverseEdge = graph.findEdgeByVertices(edge.getVertexV, edge.getVertexU);
+                    if(reverseEdge)
+                        reverseEdge.setFlow(edge.getFlow() - residualCapacity);
                 }
             }
         }
@@ -351,6 +350,19 @@ export class GraphAlgorithms {
             return true;
         }
     }
+
+    getPath(graph, s, v) {
+        if(v == s) {
+            return this.path;
+        } else if(v.getPredecessor() == null) {
+            return this.path;
+        } else {
+            this.path.push(graph.findEdgeByVertices(v.getPredecessor()), v);
+            this.getPath(graph, s, v.getPredecessor());
+            return this.path;
+        }
+    }
+
 
     wait() { return new Promise(resolve => setTimeout(resolve, 400)); }
     getTime() { return this.time; }
