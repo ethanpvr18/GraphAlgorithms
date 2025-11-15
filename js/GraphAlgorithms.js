@@ -11,7 +11,6 @@ export class GraphAlgorithms {
 
         this.time = 0;
         this.topoSortedList = new LinkedList();
-        this.path = [];
     }
     
     async dfs(graph, sourceVertex) {
@@ -297,18 +296,17 @@ export class GraphAlgorithms {
             }
         }
 
-        while(this.hasPath(graph, sourceVertex, sinkVertex)) {
-            for (let edge of this.getPath(graph, s, v)) {
-                let residualCapacity = edge.getCapacity() - edge.getFlow()
-                edge.setFlow(edge.getFlow() + residualCapacity);
+        let path = this.getPath(graph, sourceVertex, sinkVertex);
+
+        while(path.length > 0) {
+            for (let edge of path) {
+                edge.setFlow(edge.getFlow()++);
                 edge.select(`rgba(255, 0, 0, ${edge.getFlow() / edge.getCapacity()})`);
-
-                // let reverseEdge = graph.findEdgeByVertices(edge.getVertexV, edge.getVertexU);
-                // if(reverseEdge)
-                //     reverseEdge.setFlow(edge.getFlow() - residualCapacity);
             }
-        }
 
+            path = this.getPath(graph, sourceVertex, sinkVertex);
+        }
+        
         let totalFlow = 0;
         
         for (let edge of sourceVertex.adjEdges) {            
@@ -347,27 +345,26 @@ export class GraphAlgorithms {
         }
     }
 
-    hasPath(graph, s, v) {
-        if(v == s) {
-            return false;
-        } else if(v.getPredecessor() == null) {
-            return false;
-        } else {
-            this.hasPath(graph, s, v.getPredecessor());
-            return true;
+    getPath(graph, s, v, path=[]) {
+        let currentPath = path;
+        try {
+            if(v == s) {
+                return currentPath;
+            } else if(v.getPredecessor() == null) {
+                return currentPath;
+            } else {
+                let edge = graph.findEdgeByVertices(v.getPredecessor(), v);
+                if(edge.getFlow() < edge.getCapacity())
+                    currentPath.push(edge);
+                this.getPath(graph, s, v.getPredecessor(), currentPath);
+                return currentPath;
+            }
+        } catch (error) {
+            if(this.result && error instanceof RangeError) {
+                this.result.add('   Flow network cannot contain a cycle!');
+            }
         }
-    }
-
-    getPath(graph, s, v) {
-        if(v == s) {
-            return this.path;
-        } else if(v.getPredecessor() == null) {
-            return this.path;
-        } else {
-            this.path.push(graph.findEdgeByVertices(v.getPredecessor()), v);
-            this.getPath(graph, s, v.getPredecessor());
-            return this.path;
-        }
+        
     }
 
     wait() { return new Promise(resolve => setTimeout(resolve, 400)); }

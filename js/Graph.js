@@ -219,7 +219,7 @@ export class Graph {
                 weight: e.weight,
                 isDirected: e.isDirected,
                 flow: e.flow,
-                capacity: e.getCapacity()
+                capacity: e.capacity
             })),
             x: parseFloat(v.element.style.left),
             y: parseFloat(v.element.style.top),
@@ -244,7 +244,7 @@ export class Graph {
                 const sinkVertex = this.findVertexByLabel(e.v);
 
                 if(sourceVertex != null && sinkVertex != null)
-                    sourceVertex.connect(this, sinkVertex, e.getWeight());
+                    sourceVertex.connect(this, sinkVertex, e.weight);
             }
         }
     }
