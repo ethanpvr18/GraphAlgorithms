@@ -279,7 +279,7 @@ export class GraphAlgorithms {
 
     }
 
-    async findMaxFlow(graph, sourceVertex, sinkVertex) {
+    async findMaxFlow(graph, sourceVertex, sinkVertex) {        
         if(this.result) {
             this.result.remove();
             this.result = new Result();
@@ -300,7 +300,7 @@ export class GraphAlgorithms {
         while(path.length > 0) {
             for (let edge of path) {
                 edge.setFlow(edge.getFlow() + 1);
-                console.log(`${edge.getFlow()} / ${edge.getCapacity()}`);
+                console.log(`${edge.getCapacity()}`);
                 edge.select(`rgba(255, 0, 0, ${edge.getFlow() / edge.getCapacity()})`);
             }
 
@@ -314,7 +314,6 @@ export class GraphAlgorithms {
         }
 
         this.result.add(`Maximum Flow = ${totalFlow}`);
-        
     }
 
     async findMaxMatch(graph) {
