@@ -287,7 +287,6 @@ export class GraphAlgorithms {
             this.result = new Result();
         }
         this.result.clear();
-        this.result.add('Maximum Flow: ');
         await this.wait();
 
         for (let vertex of graph.vertices) {            
@@ -300,11 +299,12 @@ export class GraphAlgorithms {
 
         while(path.length > 0) {
             for (let edge of path) {
-                edge.setFlow(edge.getFlow()++);
+                edge.setFlow(edge.getFlow() + 1);
+                console.log(`${edge.getFlow()} / ${edge.getCapacity()}`);
                 edge.select(`rgba(255, 0, 0, ${edge.getFlow() / edge.getCapacity()})`);
             }
 
-            path = this.getPath(graph, sourceVertex, sinkVertex);
+            path = this.getPath(graph, sourceVertex, sinkVertex, path);
         }
         
         let totalFlow = 0;
