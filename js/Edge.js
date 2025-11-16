@@ -66,13 +66,13 @@ export class Edge {
             const labelY = (y1 + y2) / 2;
             this.edgeWeight.style.left = `${labelX}rem`;
             this.edgeWeight.style.top = `${labelY - 0.5}rem`;
-            this.edgeWeight.style.width = `${2}rem`;
-            this.edgeWeight.style.height = `${2}rem`;
+            this.edgeWeight.style.width = `${1}rem`;
+            this.edgeWeight.style.height = `${1}rem`;
 
             this.edgeFlow.style.left = `${labelX - 1.5}rem`;
             this.edgeFlow.style.top = `${labelY - 0.5}rem`;
-            this.edgeFlow.style.width = `${2}rem`;
-            this.edgeFlow.style.height = `${2}rem`;
+            this.edgeFlow.style.width = `${1}rem`;
+            this.edgeFlow.style.height = `${1}rem`;
 
             this.edgeArrow.style.left = `${x2 - (dx / length) * 1.0}rem`;
             this.edgeArrow.style.top = `${y2 - (dy / length) * 1.0}rem`;

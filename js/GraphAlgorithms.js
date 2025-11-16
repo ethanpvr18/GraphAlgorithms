@@ -296,15 +296,18 @@ export class GraphAlgorithms {
         }
 
         let path = this.getPath(graph, sourceVertex, sinkVertex);
+        console.log(path);
 
-        while(path.length > 0) {
-            for (let edge of path) {
-                edge.setFlow(edge.getFlow() + 1);
-                edge.select(`rgba(255, 0, 0, ${edge.getFlow() / edge.getCapacity()})`);
-            }
+        // while(path.length > 0) {
+            
+            // for (let edge of path) {
+            //     console.log('here2');
+            //     edge.setFlow(edge.getFlow() + 1);
+            //     edge.select(`rgba(255, 0, 0, ${edge.getFlow() / edge.getCapacity()})`);
+            // }
 
-            path = this.getPath(graph, sourceVertex, sinkVertex, path);
-        }
+            // path = this.getPath(graph, sourceVertex, sinkVertex, path);
+        // }
         
         let totalFlow = 0;
         
