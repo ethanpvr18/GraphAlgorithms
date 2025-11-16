@@ -21,63 +21,69 @@ export class Edge {
         this.edgeArrow = document.createElement('div');
         this.edgeArrow.classList.add('edge-arrow');
 
-        this.update = () => {
-            const rem = parseFloat(getComputedStyle(document.documentElement).fontSize);
-
-            if(!this.u.element || !this.v.element) return;
-
-            const graphRect = document.body.getBoundingClientRect();
-            const v1Rect = this.u.element.getBoundingClientRect();
-            const v2Rect = this.v.element.getBoundingClientRect();
-            
-            if(v1Rect.width === 0 || v2Rect.width === 0) {
-                return;
-            }
-
-            const x1 = ((v1Rect.left + v1Rect.width / 2) - graphRect.left) / rem;
-            const y1 = ((v1Rect.top + v1Rect.height / 2) - graphRect.top) / rem;
-            const x2 = ((v2Rect.left + v2Rect.width / 2) - graphRect.left) / rem;
-            const y2 = ((v2Rect.top + v2Rect.height / 2) - graphRect.top) / rem;
-
-            const dx = x2 - x1;
-            const dy = y2 - y1;
-            const length = Math.sqrt(dx * dx + dy * dy);
-            const angle = Math.atan2(dy, dx) * 180 / Math.PI;
-
-            if(length > 0) {
-                this.element.style.left = `${x1}rem`;
-                this.element.style.top = `${y1}rem`;
-                this.element.style.width = `${length}rem`;
-                this.element.style.transform = `rotate(${angle}deg)`;
-
-                const labelX = (x1 + x2) / 2;
-                const labelY = (y1 + y2) / 2;
-                this.edgeWeight.style.left = `${labelX}rem`;
-                this.edgeWeight.style.top = `${labelY - 0.5}rem`;
-                this.edgeWeight.style.width = `${1}rem`;
-                this.edgeWeight.style.height = `${1}rem`;
-
-                this.edgeFlow.style.left = `${labelX - 1.5}rem`;
-                this.edgeFlow.style.top = `${labelY - 0.5}rem`;
-                this.edgeFlow.style.width = `${1}rem`;
-                this.edgeFlow.style.height = `${1}rem`;
-
-                this.edgeArrow.style.left = `${x2 - (dx / length) * 1.5}rem`;
-                this.edgeArrow.style.top = `${y2 - (dy / length) * 1.5}rem`;
-                this.edgeArrow.style.transform = `translate(-50%, 0) rotate(${angle + 90}deg)`;
-            }
-
-            if(this.isDirected) {
-                this.edgeArrow.style.display = 'block';
-            }else{
-                this.edgeArrow.style.display = 'none';
-            }
-        }
 
         document.body.appendChild(this.element);
         document.body.appendChild(this.edgeWeight);
         document.body.appendChild(this.edgeFlow);
         document.body.appendChild(this.edgeArrow);
+    }
+
+    update() {
+        const rem = parseFloat(getComputedStyle(document.documentElement).fontSize);
+
+        if(!this.u.element || !this.v.element) return;
+
+        const graphRect = document.body.getBoundingClientRect();
+        const v1Rect = this.u.element.getBoundingClientRect();
+        const v2Rect = this.v.element.getBoundingClientRect();
+        
+        if(v1Rect.width === 0 || v2Rect.width === 0) {
+            return;
+        }
+
+        const x1 = (v1Rect.left + v1Rect.width / 2) / rem;
+        const y1 = (v1Rect.top + v1Rect.height / 2) / rem;
+        const x2 = (v2Rect.left + v2Rect.width / 2) / rem;
+        const y2 = (v2Rect.top + v2Rect.height / 2) / rem;
+
+        // const x1 = ((v1Rect.left + v1Rect.width / 2) - graphRect.left) / rem;
+        // const y1 = ((v1Rect.top + v1Rect.height / 2) - graphRect.top) / rem;
+        // const x2 = ((v2Rect.left + v2Rect.width / 2) - graphRect.left) / rem;
+        // const y2 = ((v2Rect.top + v2Rect.height / 2) - graphRect.top) / rem;
+
+        const dx = x2 - x1;
+        const dy = y2 - y1;
+        const length = Math.sqrt(dx * dx + dy * dy);
+        const angle = Math.atan2(dy, dx) * 180 / Math.PI;
+
+        if(length > 0) {
+            this.element.style.left = `${x1}rem`;
+            this.element.style.top = `${y1}rem`;
+            this.element.style.width = `${length}rem`;
+            this.element.style.transform = `rotate(${angle}deg)`;
+
+            const labelX = (x1 + x2) / 2;
+            const labelY = (y1 + y2) / 2;
+            this.edgeWeight.style.left = `${labelX}rem`;
+            this.edgeWeight.style.top = `${labelY - 0.5}rem`;
+            this.edgeWeight.style.width = `${2}rem`;
+            this.edgeWeight.style.height = `${2}rem`;
+
+            this.edgeFlow.style.left = `${labelX - 1.5}rem`;
+            this.edgeFlow.style.top = `${labelY - 0.5}rem`;
+            this.edgeFlow.style.width = `${2}rem`;
+            this.edgeFlow.style.height = `${2}rem`;
+
+            this.edgeArrow.style.left = `${x2 - (dx / length) * 1.0}rem`;
+            this.edgeArrow.style.top = `${y2 - (dy / length) * 1.0}rem`;
+            this.edgeArrow.style.transform = `translate(-50%, 0) rotate(${angle + 90}deg)`;
+        }
+
+        if(this.isDirected) {
+            this.edgeArrow.style.display = 'block';
+        }else{
+            this.edgeArrow.style.display = 'none';
+        }
     }
 
     getWeight() { return this.weight; }
