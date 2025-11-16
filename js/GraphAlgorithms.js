@@ -300,7 +300,6 @@ export class GraphAlgorithms {
         while(path.length > 0) {
             for (let edge of path) {
                 edge.setFlow(edge.getFlow() + 1);
-                console.log(`${edge.getCapacity()}`);
                 edge.select(`rgba(255, 0, 0, ${edge.getFlow() / edge.getCapacity()})`);
             }
 
