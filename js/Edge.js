@@ -1,11 +1,12 @@
 export class Edge {
-    constructor(u, v, weight=1, isDirected=true, flow=0, capacity=1) {
+    constructor(u, v, weight=1, isDirected=true, flow=0, capacity=weight) {
         this.u = u;
         this.v = v;
         this.weight = weight;
         this.isDirected = isDirected;
         this.flow = flow;
         this.capacity = capacity;
+        this.visited = false;
 
         this.element = document.createElement('div');
         this.element.classList.add('edge');
@@ -87,11 +88,17 @@ export class Edge {
     }
 
     getWeight() { return this.weight; }
-    getVertexU() { return this.u }
-    getVertexV() { return this.v }
-    getIsDirected() { return this.isDirected }
-    getFlow() { return this.flow }
-    getCapacity() { return this.capacity }
+    getVertexU() { return this.u; }
+    getVertexV() { return this.v; }
+    getIsDirected() { return this.isDirected; }
+    getFlow() { return this.flow; }
+    getCapacity() { return this.capacity; }
+
+    isVisited() { return this.visited; }
+
+    visit() {
+        this.visited = true; 
+    }
 
     setWeight(weight) { 
         this.weight = weight; 
@@ -110,7 +117,9 @@ export class Edge {
         this.update();
     }
 
-    setCapacity(capacity) { this.capacity = capacity; }
+    setCapacity(capacity) { 
+        this.capacity = capacity; 
+    }
 
     select(color='red') {
         if(this.element && !this.element.classList.contains('selected')) {

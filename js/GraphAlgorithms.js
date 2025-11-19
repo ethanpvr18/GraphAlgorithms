@@ -289,29 +289,28 @@ export class GraphAlgorithms {
         this.result.clear();
         await this.wait();
 
-        for (let vertex of graph.vertices) {            
-            for (let edge of vertex.adjEdges) {            
+        for (let vertex of graph.vertices) {  
+            for (let edge of vertex.adjEdges) {    
                 edge.setFlow(0);
             }
         }
 
         let path = this.getPath(graph, sourceVertex, sinkVertex);
-        console.log(path);
 
-        // while(path.length > 0) {
-            
-            // for (let edge of path) {
-            //     console.log('here2');
-            //     edge.setFlow(edge.getFlow() + 1);
-            //     edge.select(`rgba(255, 0, 0, ${edge.getFlow() / edge.getCapacity()})`);
-            // }
+        while(path.length > 0 && path.length <= graph.vertices.numOfEntries) {
+            for (let edge of path) {
+                edge.setFlow(edge.getFlow() + 1);
+                edge.deselect();
+                edge.select(`rgba(255, 0, 0, ${edge.getFlow() / edge.getCapacity()})`);
+                await this.wait();
+            }
 
-            // path = this.getPath(graph, sourceVertex, sinkVertex, path);
-        // }
+            path = this.getPath(graph, sourceVertex, sinkVertex);
+        }
         
         let totalFlow = 0;
         
-        for (let edge of sourceVertex.adjEdges) {            
+        for (let edge of sourceVertex.adjEdges) {  
             totalFlow += edge.getFlow();
         }
 
@@ -347,25 +346,25 @@ export class GraphAlgorithms {
     }
 
     getPath(graph, s, v, path=[]) {
-        let currentPath = path;
         try {
-            if(v == s) {
-                return currentPath;
-            } else if(v.getPredecessor() == null) {
-                return currentPath;
-            } else {
-                let edge = graph.findEdgeByVertices(v.getPredecessor(), v);
-                if(edge.getFlow() < edge.getCapacity())
-                    currentPath.push(edge);
-                this.getPath(graph, s, v.getPredecessor(), currentPath);
-                return currentPath;
+            if(s == v) {
+                return path;
             }
+            for(let edge of s.adjEdges) {
+                if(edge.getFlow() <= edge.getCapacity() + 1 && !edge.isVisited()) {
+                    if(edge.getFlow() == edge.getCapacity() + 1)
+                        edge.visit();
+                    path.push(edge);
+                    return this.getPath(graph, edge.getVertexV(), v, path);
+                }
+            }
+            path = []
+            return path;
         } catch (error) {
             if(this.result && error instanceof RangeError) {
                 this.result.add('   Flow network cannot contain a cycle!');
             }
         }
-        
     }
 
     wait() { return new Promise(resolve => setTimeout(resolve, 400)); }
