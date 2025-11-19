@@ -297,7 +297,7 @@ export class GraphAlgorithms {
 
         let path = this.getPath(graph, sourceVertex, sinkVertex);
 
-        while(path.length > 0 && path.length <= graph.vertices.numOfEntries) {
+        while(path.length > 0) {
             for (let edge of path) {
                 edge.setFlow(edge.getFlow() + 1);
                 edge.deselect();
