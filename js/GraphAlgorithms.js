@@ -351,10 +351,14 @@ export class GraphAlgorithms {
                 return path;
             }
             for(let edge of s.adjEdges) {
-                if(edge.getFlow() <= edge.getCapacity() + 1 && !edge.isVisited()) {
-                    if(edge.getFlow() == edge.getCapacity() + 1)
-                        edge.visit();
+                if(edge && edge.getFlow() < edge.getCapacity() && !edge.isVisited()) {
                     path.push(edge);
+                    return this.getPath(graph, edge.getVertexV(), v, path);
+                }
+
+                let reverseEdge = graph.findEdgeByVertices(edge.getVertexV(), edge.getVertexU());
+                if(reverseEdge && reverseEdge.getFlow() > 0 && !reverseEdge.isVisited()) {
+                    path.push(reverseEdge);
                     return this.getPath(graph, edge.getVertexV(), v, path);
                 }
             }

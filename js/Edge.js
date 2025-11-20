@@ -47,11 +47,6 @@ export class Edge {
         const x2 = (v2Rect.left + v2Rect.width / 2) / rem;
         const y2 = (v2Rect.top + v2Rect.height / 2) / rem;
 
-        // const x1 = ((v1Rect.left + v1Rect.width / 2) - graphRect.left) / rem;
-        // const y1 = ((v1Rect.top + v1Rect.height / 2) - graphRect.top) / rem;
-        // const x2 = ((v2Rect.left + v2Rect.width / 2) - graphRect.left) / rem;
-        // const y2 = ((v2Rect.top + v2Rect.height / 2) - graphRect.top) / rem;
-
         const dx = x2 - x1;
         const dy = y2 - y1;
         const length = Math.sqrt(dx * dx + dy * dy);
