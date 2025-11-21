@@ -297,7 +297,7 @@ export class GraphAlgorithms {
 
         let path = this.getPath(graph, sourceVertex, sinkVertex);
 
-        while(path.length > 0) {
+        while(path && path.length > 0) {
             for (let edge of path) {
                 edge.setFlow(edge.getFlow() + 1);
                 edge.deselect();
@@ -308,13 +308,7 @@ export class GraphAlgorithms {
             path = this.getPath(graph, sourceVertex, sinkVertex);
         }
         
-        let totalFlow = 0;
-        
-        for (let edge of sourceVertex.adjEdges) {  
-            totalFlow += edge.getFlow();
-        }
-
-        this.result.add(`Maximum Flow = ${totalFlow}`);
+        this.result.add(`Maximum Flow = ${sinkVertex.getFlow()}`);
     }
 
     async findMaxMatch(graph) {
@@ -351,19 +345,18 @@ export class GraphAlgorithms {
                 return path;
             }
             for(let edge of s.adjEdges) {
-                if(edge && edge.getFlow() < edge.getCapacity() && !edge.isVisited()) {
+                if(edge && edge.getFlow() < edge.getCapacity()) {
                     path.push(edge);
                     return this.getPath(graph, edge.getVertexV(), v, path);
                 }
 
                 let reverseEdge = graph.findEdgeByVertices(edge.getVertexV(), edge.getVertexU());
-                if(reverseEdge && reverseEdge.getFlow() > 0 && !reverseEdge.isVisited()) {
+                if(reverseEdge && reverseEdge.getFlow() > 0) {
                     path.push(reverseEdge);
-                    return this.getPath(graph, edge.getVertexV(), v, path);
+                    return this.getPath(graph, edge.getVertexU(), v, path);
                 }
             }
-            path = []
-            return path;
+            path.pop();
         } catch (error) {
             if(this.result && error instanceof RangeError) {
                 this.result.add('   Flow network cannot contain a cycle!');
