@@ -308,7 +308,15 @@ export class GraphAlgorithms {
             path = this.getPath(graph, sourceVertex, sinkVertex);
         }
         
-        this.result.add(`Maximum Flow = ${sinkVertex.getFlow()}`);
+        let maxFlow = 0;
+
+        for(let predecessor of sinkVertex.getPredecessor()) {
+            for(let edge of predecessor.adjEdges) {
+                maxFlow += edge.getFlow();
+            }
+        }
+
+        this.result.add(`Maximum Flow = ${maxFlow}`);
     }
 
     async findMaxMatch(graph) {
