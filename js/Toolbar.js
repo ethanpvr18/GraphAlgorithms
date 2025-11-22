@@ -135,13 +135,8 @@ export class Toolbar {
         this.runDropdownContent.appendChild(this.bfsBtn);
         this.runDropdownContent.appendChild(this.topoSortBtn);
         this.runDropdownContent.appendChild(this.mstPrimsBtn);
-        // this.runDropdownContent.appendChild(this.mstKruskalsBtn);
         this.runDropdownContent.appendChild(this.djikstrasShortestPathBtn);
-        // this.runDropdownContent.appendChild(this.bellmanFordShortestPathBtn);
-        // this.runDropdownContent.appendChild(this.floydWarshallShortestPathBtn);
-        // this.runDropdownContent.appendChild(this.johnsonsShortestPathBtn);
         this.runDropdownContent.appendChild(this.maxFlowBtn);
-        // this.runDropdownContent.appendChild(this.maxFlowFFBtn);
         this.runDropdownContent.appendChild(this.maxMatchBtn);
 
         this.runDropdown.appendChild(this.runDropdownTitle);
