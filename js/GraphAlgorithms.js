@@ -310,10 +310,8 @@ export class GraphAlgorithms {
         
         let maxFlow = 0;
 
-        for(let predecessor of sinkVertex.getPredecessor()) {
-            for(let edge of predecessor.adjEdges) {
-                maxFlow += edge.getFlow();
-            }
+        for(let edge of sinkVertex.getPredecessor().adjEdges) {
+            maxFlow += edge.getFlow();
         }
 
         this.result.add(`Maximum Flow = ${maxFlow}`);
