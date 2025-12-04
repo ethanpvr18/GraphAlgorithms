@@ -378,7 +378,7 @@ const topoSortBtnListener = async () => {
 
 toolbar.topoSortBtn.addEventListener('click', topoSortBtnListener);
 
-const mstPrimsBtnListener = async () => {
+const mstBtnListener = async () => {
 
     if(toolbar.controlsDialog.style.display == 'block')
             toolbar.controlsDialog.style.display = 'none';
@@ -394,27 +394,9 @@ const mstPrimsBtnListener = async () => {
     graphAlgorithms.createMst(graph, sourceVertex);
 };
 
-toolbar.mstPrimsBtn.addEventListener('click', mstPrimsBtnListener);
+toolbar.mstBtn.addEventListener('click', mstBtnListener);
 
-const mstKruskalsBtnListener = async () => {
-
-    if(toolbar.controlsDialog.style.display == 'block')
-            toolbar.controlsDialog.style.display = 'none';
-
-    graph.clearSelection();
-    currentDialog = null;
-    currentDialog = new Dialog();
-        
-    const userInput = await currentDialog.waitForUserInput();
-    const sourceVertex = graph.findVertexByLabel(userInput);
-    if(!sourceVertex) return;
-
-    graphAlgorithms.createMst(graph, sourceVertex);
-};
-
-toolbar.mstKruskalsBtn.addEventListener('click', mstKruskalsBtnListener);
-
-const djikstrasShortestPathBtnListener = async () => {
+const shortestPathBtnListener = async () => {
     if(toolbar.controlsDialog.style.display == 'block')
             toolbar.controlsDialog.style.display = 'none';
 
@@ -432,67 +414,7 @@ const djikstrasShortestPathBtnListener = async () => {
     graphAlgorithms.findShortestPath(graph, startVertex, destinationVertex);
 };
 
-toolbar.djikstrasShortestPathBtn.addEventListener('click', djikstrasShortestPathBtnListener);
-
-const bellmanFordShortestPathBtnListener = async () => {
-    if(toolbar.controlsDialog.style.display == 'block')
-            toolbar.controlsDialog.style.display = 'none';
-
-    graph.clearSelection();
-    currentDialog = null;
-    currentDialog = new TwoInputDialog();
-
-    const userInput = await currentDialog.waitForUserInput();
-
-    const startVertex = graph.findVertexByLabel(userInput[0]);
-    if(!startVertex) return;
-    const destinationVertex = graph.findVertexByLabel(userInput[1]);
-    if(!destinationVertex) return;
-
-    graphAlgorithms.findShortestPath(graph, startVertex, destinationVertex);
-};
-
-toolbar.bellmanFordShortestPathBtn.addEventListener('click', bellmanFordShortestPathBtnListener);
-
-const floydWarshallShortestPathBtnListener = async () => {
-    if(toolbar.controlsDialog.style.display == 'block')
-            toolbar.controlsDialog.style.display = 'none';
-
-    graph.clearSelection();
-    currentDialog = null;
-    currentDialog = new TwoInputDialog();
-
-    const userInput = await currentDialog.waitForUserInput();
-
-    const startVertex = graph.findVertexByLabel(userInput[0]);
-    if(!startVertex) return;
-    const destinationVertex = graph.findVertexByLabel(userInput[1]);
-    if(!destinationVertex) return;
-
-    graphAlgorithms.findShortestPath(graph, startVertex, destinationVertex);
-};
-
-toolbar.floydWarshallShortestPathBtn.addEventListener('click', floydWarshallShortestPathBtnListener);
-
-const johnsonsShortestPathBtnListener = async () => {
-    if(toolbar.controlsDialog.style.display == 'block')
-            toolbar.controlsDialog.style.display = 'none';
-
-    graph.clearSelection();
-    currentDialog = null;
-    currentDialog = new TwoInputDialog();
-
-    const userInput = await currentDialog.waitForUserInput();
-
-    const startVertex = graph.findVertexByLabel(userInput[0]);
-    if(!startVertex) return;
-    const destinationVertex = graph.findVertexByLabel(userInput[1]);
-    if(!destinationVertex) return;
-
-    graphAlgorithms.findShortestPath(graph, startVertex, destinationVertex);
-};
-
-toolbar.johnsonsShortestPathBtn.addEventListener('click', johnsonsShortestPathBtnListener);
+toolbar.shortestPathBtn.addEventListener('click', shortestPathBtnListener);
 
 const maxFlowBtnListener = async () => {
     if(toolbar.controlsDialog.style.display == 'block')
@@ -513,38 +435,6 @@ const maxFlowBtnListener = async () => {
 };
 
 toolbar.maxFlowBtn.addEventListener('click', maxFlowBtnListener);
-
-const maxFlowFFBtnListener = async () => {
-    if(toolbar.controlsDialog.style.display == 'block')
-            toolbar.controlsDialog.style.display = 'none';
-
-    graph.clearSelection();
-    currentDialog = null;
-    currentDialog = new TwoInputDialog();
-
-    const userInput = await currentDialog.waitForUserInput();
-
-    const sourceVertex = graph.findVertexByLabel(userInput[0]);
-    if(!sourceVertex) return;
-    const sinkVertex = graph.findVertexByLabel(userInput[1]);
-    if(!sinkVertex) return;
-
-    graphAlgorithms.findMaxFlow(graph, sourceVertex, sinkVertex);
-};
-
-toolbar.maxFlowFFBtn.addEventListener('click', maxFlowFFBtnListener);
-
-
-const maxMatchBtnListener = async () => {
-    if(toolbar.controlsDialog.style.display == 'block')
-            toolbar.controlsDialog.style.display = 'none';
-
-    graph.clearSelection();
-
-    graphAlgorithms.findMaxMatch(graph);
-};
-
-toolbar.maxMatchBtn.addEventListener('click', maxMatchBtnListener);
 
 const beforeUnloadListener = () => {
     graph.updateGraph();
