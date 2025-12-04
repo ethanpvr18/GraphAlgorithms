@@ -45,59 +45,23 @@ export class Toolbar {
         this.topoSortBtn.classList.add('btn');
         this.topoSortBtn.classList.add('dropdown-button');
 
-        this.mstPrimsBtn = document.createElement('input');
-        this.mstPrimsBtn.type = 'button';
-        this.mstPrimsBtn.value = 'Minimum Spanning Tree';
-        this.mstPrimsBtn.classList.add('btn');
-        this.mstPrimsBtn.classList.add('dropdown-button');
+        this.mstBtn = document.createElement('input');
+        this.mstBtn.type = 'button';
+        this.mstBtn.value = 'Minimum Spanning Tree';
+        this.mstBtn.classList.add('btn');
+        this.mstBtn.classList.add('dropdown-button');
 
-        this.mstKruskalsBtn = document.createElement('input');
-        this.mstKruskalsBtn.type = 'button';
-        this.mstKruskalsBtn.value = 'Minimum Spanning Tree';
-        this.mstKruskalsBtn.classList.add('btn');
-        this.mstKruskalsBtn.classList.add('dropdown-button');
-
-        this.djikstrasShortestPathBtn = document.createElement('input');
-        this.djikstrasShortestPathBtn.type = 'button';
-        this.djikstrasShortestPathBtn.value = 'Shortest Path';
-        this.djikstrasShortestPathBtn.classList.add('btn');
-        this.djikstrasShortestPathBtn.classList.add('dropdown-button');
-
-        this.bellmanFordShortestPathBtn = document.createElement('input');
-        this.bellmanFordShortestPathBtn.type = 'button';
-        this.bellmanFordShortestPathBtn.value = 'Shortest Path';
-        this.bellmanFordShortestPathBtn.classList.add('btn');
-        this.bellmanFordShortestPathBtn.classList.add('dropdown-button');
-
-        this.floydWarshallShortestPathBtn = document.createElement('input');
-        this.floydWarshallShortestPathBtn.type = 'button';
-        this.floydWarshallShortestPathBtn.value = 'Shortest Path';
-        this.floydWarshallShortestPathBtn.classList.add('btn');
-        this.floydWarshallShortestPathBtn.classList.add('dropdown-button');
-
-        this.johnsonsShortestPathBtn = document.createElement('input');
-        this.johnsonsShortestPathBtn.type = 'button';
-        this.johnsonsShortestPathBtn.value = 'Shortest Path';
-        this.johnsonsShortestPathBtn.classList.add('btn');
-        this.johnsonsShortestPathBtn.classList.add('dropdown-button');
+        this.shortestPathBtn = document.createElement('input');
+        this.shortestPathBtn.type = 'button';
+        this.shortestPathBtn.value = 'Shortest Path';
+        this.shortestPathBtn.classList.add('btn');
+        this.shortestPathBtn.classList.add('dropdown-button');
 
         this.maxFlowBtn = document.createElement('input');
         this.maxFlowBtn.type = 'button';
         this.maxFlowBtn.value = 'Maximum Flow';
         this.maxFlowBtn.classList.add('btn');
         this.maxFlowBtn.classList.add('dropdown-button');
-
-        this.maxFlowFFBtn = document.createElement('input');
-        this.maxFlowFFBtn.type = 'button';
-        this.maxFlowFFBtn.value = 'Maximum Flow';
-        this.maxFlowFFBtn.classList.add('btn');
-        this.maxFlowFFBtn.classList.add('dropdown-button');
-
-        this.maxMatchBtn = document.createElement('input');
-        this.maxMatchBtn.type = 'button';
-        this.maxMatchBtn.value = 'Maximum Matching';
-        this.maxMatchBtn.classList.add('btn');
-        this.maxMatchBtn.classList.add('dropdown-button');
 
         this.fileDropdown = document.createElement('div');
         this.fileDropdown.classList.add('dropdown');
